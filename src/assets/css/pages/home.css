@@ -1,0 +1,19 @@
+.home {
+    text-align: center;
+}
+
+.home h1 {
+    padding-top: 20px;
+    font-size: 40px;
+    margin: 10px;
+}
+
+nav.links{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 50px;
+}
+
+/* main.container{
+    margin-top: 50px;
+} */

@@ -1,0 +1,35 @@
+/* check box */
+
+.check-box {
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  accent-color: gray;
+}
+
+
+.check-box .checkbox-text {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  padding: 5px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  white-space: nowrap;
+  font-size: 10px;
+  z-index: 2;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+.check-box:hover .checkbox-text {
+  display: block;
+}
+
+.check-box input {
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}

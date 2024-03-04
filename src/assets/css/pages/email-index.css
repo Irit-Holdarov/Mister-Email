@@ -1,0 +1,12 @@
+.email-index{
+   
+    height: 100%;
+    background-color: #f6f8fc;
+    display: grid;
+    grid-template-areas: "header header"
+                         "sidebar email-list";
+
+        
+    grid-template-columns: 256px 1fr;
+    grid-template-rows: auto 1fr;
+}

@@ -1,0 +1,31 @@
+/* Star Marker */
+.star-marker {
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.star-marker .star-marked {
+  color: rgb(234, 234, 14);
+}
+
+.star-text {
+  position: absolute;
+  top: 110%;
+  left: 30%;
+  transform: translateX(-50%);
+  display: none;
+  padding: 5px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+
+  white-space: nowrap;
+  font-size: 10px;
+  z-index: 2;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+.star-marker:hover .star-text {
+  display: block;
+}

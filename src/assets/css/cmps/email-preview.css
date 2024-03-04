@@ -1,0 +1,32 @@
+
+.email-preview{
+  font-weight: bold;
+  border: 1px solid transparent;
+  padding: 0 13px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 31px 42px 236px 300px auto;
+  margin: 3px;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.email-preview:hover {
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+      0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  cursor: pointer;
+  z-index: 2; 
+}
+
+
+
+/* Sent At */
+.email-preview-sent-at{
+  display: flex;
+  justify-content: flex-end;
+  color: grey;
+  font-size: 85%;
+}
+
+

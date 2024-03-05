@@ -46,6 +46,7 @@ export function EmailIndex() {
       <SideBar />
       {/* צריך לעשות תנאי שאם לוחצים על איידי מסוים כלומר יש איידי בנתיב אז שיעבור לאיידי ואם לא אז שיציג את הרשימה */}
       {/* <EmailList emails={emails} /> <Outlet /> */}
+
       <EmailList emails={emails} onRemoveEmail={onRemoveEmail} />
     </div>
   )

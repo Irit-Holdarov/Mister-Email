@@ -5,11 +5,15 @@
   padding: 0 13px;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 31px 42px 236px 300px auto;
+  grid-template-columns: 31px 42px 1fr;
   margin: 3px;
   font-size: 14px;
   position: relative;
   z-index: 1;
+}
+
+.read.email-preview{
+  font-weight: normal;
 }
 
 .email-preview:hover {
@@ -19,7 +23,15 @@
   z-index: 2; 
 }
 
+a.email-link{
+  text-decoration: none;
+  color: inherit;
+}
 
+.email-link-grid{
+  display: grid;
+  grid-template-columns: 236px 300px auto;
+}
 
 /* Sent At */
 .email-preview-sent-at{

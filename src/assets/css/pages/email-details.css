@@ -1,0 +1,38 @@
+.email-details {
+  padding: 10px;
+  height: 100%;
+}
+
+.head-email{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.link-title{
+  background-color: black;
+  color: white
+}
+
+.email-details-subject {
+  font-size: 25px;
+  font-family: Monaco;
+}
+
+.email-details-sent-at {
+  font-size: 90%;
+  color: grey;
+}
+
+
+span{
+  color: gray;
+}
+
+.email-details-to {
+  padding-left: 20px;
+}
+
+.email-details-body {
+  font-family: Consolas;
+  padding-top: 20px;
+}

@@ -1,4 +1,5 @@
 import { EmailPreview } from "./EmailPreview";
+// import { IoTrashOutline } from "react-icons/io5";
 
 
 export function EmailList({emails, onRemoveEmail}){
@@ -9,6 +10,7 @@ export function EmailList({emails, onRemoveEmail}){
         <li key={email.id}>
           <EmailPreview email={email}/>
           <div className="email-actions">
+          {/* <IoTrashOutline /> */}
             <button className="delete-email"
             onClick={() => onRemoveEmail(email.id)}>X</button>
           </div>

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { CheckBox } from "./CheckBox";
 import { StarMarker } from "./StarMarker";
+
+import { CheckBox } from "./CheckBox";
 
 
 export function EmailPreview({ email }) {

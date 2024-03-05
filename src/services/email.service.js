@@ -17,7 +17,7 @@ const loggedinUser = {
     fullname: 'Irit Holdarov',
 };
 
- _createEmails()
+_createEmails()
 
 
 async function query() {
@@ -73,7 +73,7 @@ function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
         emails = [
-              {
+            {
                 id: 'e101',
                 subject: 'Miss you!',
                 body: 'Would love to catch up sometimes',

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { Outlet } from "react-router-dom"
+
 import { emailService } from "../services/email.service"
+
 import { EmailList } from "../cmps/EmailList"
 import { AppEmailHeader } from "../cmps/AppEmailHeader"
-import { Outlet } from "react-router-dom"
 import { SideBar } from "../cmps/SideBar"
 
 export function EmailIndex() {

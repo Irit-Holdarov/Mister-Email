@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+
 import imgUrl from '../assets/imgs/images.png'
 
 export function Home() {

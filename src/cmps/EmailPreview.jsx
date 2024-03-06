@@ -5,7 +5,7 @@ import { GoStarFill } from "react-icons/go";
 import { CheckBox } from "./CheckBox";
 
 
-export function EmailPreview({ email , onUpdateStar}) {
+export function EmailPreview({ email , onUpdateStar, onUpdateReadEmail}) {
 
   function formattedDate(sentAt) {
     return new Date(sentAt).toLocaleDateString('en-GB', {
@@ -22,7 +22,8 @@ export function EmailPreview({ email , onUpdateStar}) {
       <GoStarFill className={`star-marker ${email.isStarred ? 'star-marked' : ''}`}
       onClick={() => {onUpdateStar(email)}} />
 
-      <Link to={`/email/:folder/${email.id}`} className="email-link" >
+      <Link to={`/email/:folder/${email.id}`} className="email-link" 
+      onClick={() => {onUpdateReadEmail(email)}}>
         <div className="email-link-grid">
           <div className="email-preview-from">{email.from}</div>
           <div className="email-preview-subject">{email.subject}</div>

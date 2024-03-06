@@ -16,11 +16,9 @@
   color: #c4c7c5;
 }
 
-
-.star-marker .star-marked {
+.star-marker.star-marked {
   color: rgb(234, 234, 14);
 }
-
 
 
 .read.email-preview {

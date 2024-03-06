@@ -6,15 +6,18 @@ import { IoMdMailUnread } from "react-icons/io";
 
 export function EmailList({ emails, onRemoveEmail, onApdateEmail}) {
 
-  // function onUpdateReadEmail(email){
-  //   const newEmail = {...email, isRead: true}
-  //   onApdateEmail(newEmail)
-  // }
+  function onUpdateReadEmail(email){
+    const newEmail = {...email, isRead: true}
+    onApdateEmail(newEmail)
+  }
 
   // function onUpdateUnreadEmail(email){
   //   const newEmail = {...email, isRead: false}
   //   onApdateEmail(newEmail)
   // }
+
+  
+
 
   function onUpdateStar(email){
     const newEmail = {...email, isStarred: !email.isStarred}
@@ -38,7 +41,7 @@ export function EmailList({ emails, onRemoveEmail, onApdateEmail}) {
       {
         emails.map(email =>
           <li key={email.id}>
-            <EmailPreview email={email} onUpdateStar={onUpdateStar}/>
+            <EmailPreview email={email} onUpdateStar={onUpdateStar} onUpdateReadEmail={onUpdateReadEmail}/>
             <div className="email-actions">
               {/* remove */}
               <IoTrashOutline className="delete-email" 

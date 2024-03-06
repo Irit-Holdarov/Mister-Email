@@ -5,7 +5,9 @@
   padding-top: 10px;
   margin-right: 10px;
   grid-area: email-list;
+
 }
+
 
 ul.email-list {
   background-color: white;
@@ -16,6 +18,7 @@ ul.email-list {
 
 .delete-email{
   cursor: pointer;
+  display: none;
 }
 
 /* read-unread */
@@ -23,10 +26,17 @@ ul.email-list {
   font-weight: bold;
   cursor: pointer;
   background-color: white;
+  display: none;
 }
 
 .read-mail{
   font-weight: normal;
   cursor: pointer;
-  background-color: #f6f8fc
+  background-color: #f6f8fc;
+  display: none;
+}
+
+
+.email-preview:hover .email-preview-sent-at{
+  display: none;
 }

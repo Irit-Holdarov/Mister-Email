@@ -1,0 +1,32 @@
+.email-filter {
+  grid-area: filter;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  position: relative;
+}
+
+.search-icon{
+  width: 22px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+}
+
+input#search{
+  padding: 0 48px;
+  background-color: #eaf1fb;
+  border-radius: 24px;
+  font-weight: 500;
+  width: 466px;
+}
+
+input {
+  border: none;
+  height: 35px;
+}

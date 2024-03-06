@@ -6,12 +6,16 @@ import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
 import { AppEmailHeader } from "../cmps/AppEmailHeader"
 import { SideBar } from "../cmps/SideBar"
+import { EmailFilter } from "../cmps/EmailFilter"
 
 export function EmailIndex() {
   const [emails, setEmails] = useState(null)
+  const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
+
+  console.log(filterBy)
+
 
   const params = useParams()
-  console.log(params)
 
   useEffect(() => {
     loadEmails()
@@ -20,7 +24,7 @@ export function EmailIndex() {
 
   async function loadEmails() {
     try {
-      const emails = await emailService.query()
+      const emails = await emailService.query(filterBy)
       setEmails(emails)
     } catch (err) {
       console.log('Error in loadEmails', err)
@@ -53,6 +57,7 @@ export function EmailIndex() {
   return (
     <div className="email-index">
       <AppEmailHeader />
+      <EmailFilter />
       <SideBar />
 
       {params.emailId && <Outlet />}

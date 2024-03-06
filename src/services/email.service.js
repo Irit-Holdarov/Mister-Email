@@ -27,16 +27,12 @@ async function query() {
 }
 
 // async function query(filterBy) {
-//     const emails = await storageService.query(STORAGE_KEY)
-//     if (filterBy) {
-//         var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-//         maxBatteryStatus = maxBatteryStatus || Infinity
-//         minBatteryStatus = minBatteryStatus || 0
-//         emails = emails.filter(robot => robot.type.toLowerCase().includes(type.toLowerCase()) && robot.model.toLowerCase().includes(model.toLowerCase())
-//             && (robot.batteryStatus < maxBatteryStatus)
-//             && robot.batteryStatus > minBatteryStatus)
-//     }
-//     return emails
+//     const emails = await storageService.query(STORAGE_KEY);
+//     if(filterBy){
+//         var {txt, isRead, isStarred} = filterBy
+
+//         }
+//     return emails;
 // }
 
 function getById(id) {
@@ -58,12 +54,9 @@ function save(emailToSave) {
 
 function getDefaultFilter(){
     return {
-        subject: '',
-        body:'',
-        isRead: false,
-        isStarred: false,
-        from: '',
-        to: '',
+        txt: '',
+        isRead: null,
+        isStarred: null
     }
 }
 

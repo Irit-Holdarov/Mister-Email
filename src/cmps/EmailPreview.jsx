@@ -8,14 +8,13 @@ import { CheckBox } from "./CheckBox";
 export function EmailPreview({ email , onUpdateStar, onUpdateReadEmail}) {
 
   function formattedDate(sentAt) {
-    return new Date(sentAt).toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    })
+    const date = new Date(sentAt);
+    const options = { day: 'numeric', month: 'short' };
+    return date.toLocaleDateString('en-GB', options);
   }
 
-  function senderName(addresssEmail){
+
+  function senderName(){
     return email.from.split('@')[0]
   }
 

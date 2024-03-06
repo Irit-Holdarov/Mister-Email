@@ -46,10 +46,13 @@ export function EmailDetails() {
   if (!email) return <div>Loading...</div>
   return (
     <section className="email-details">
-      <Link to='/email/:folder' title="Go Back" className="go-back">
-        <CgMailReply />
-      </Link>
+      <div className="tool-bar">
+        <Link to='/email/:folder' title="Go Back" className="go-back">
+          <CgMailReply />
+        </Link>
 
+        
+      </div>
       <header className="head-email">
         <div className="email-details-subject">{email.subject}</div>
         <div className="email-details-sent-at">{timeForDate(email.sentAt)}</div>

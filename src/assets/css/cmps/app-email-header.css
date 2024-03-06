@@ -5,6 +5,9 @@
     grid-area: header;
 }
 
+img{
+    padding-top: 15px;
+}
 .app-header section.container {
     padding: 10px;
 }

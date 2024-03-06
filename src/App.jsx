@@ -23,8 +23,6 @@ export function App() {
                             <Route path="/email/:folder/:emailId" element={ <EmailDetails /> }/>
                         </Route>
 
-                        {/* <Route path="/email/:folder/:emailId" element={<EmailDetails />} /> */}
-
                     </Routes>
                 </main>
 

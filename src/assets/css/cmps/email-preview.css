@@ -1,31 +1,16 @@
 .email-preview {
   font-weight: bold;
   background-color: #f6f8fc;
+  height: 40px;
   border: 1px solid transparent;
   padding: 0 13px;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 31px 32px 1fr;
-  margin: 3px;
   font-size: 14px;
   position: relative;
   z-index: 1;
-}
-
-
-/* star */
-.star-marker{
-  color: #c4c7c5;
-}
-
-.star-marker.star-marked {
-  color: rgb(234, 234, 14);
-}
-
-
-.read.email-preview {
-  font-weight: normal;
-  background-color: white
+  align-items: center;
 }
 
 .email-preview:hover {
@@ -45,10 +30,64 @@ a.email-link {
   grid-template-columns: 90px 100px auto 74px;
 }
 
+.read.email-preview {
+  font-weight: normal;
+  background-color: white;
+
+}
+
+/* star */
+.star-marker {
+  color: #c4c7c5;
+}
+
+.star-marker.star-marked {
+  color: rgb(234, 234, 14);
+}
+
+/* subject */
+.email-preview-subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* body */
+.email-preview-body {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 12px
+}
+
+
 /* Sent At */
 .email-preview-sent-at {
-  display: flex;
-  justify-content: flex-end;
   color: grey;
   font-size: 85%;
+  padding-left: 27px;
+}
+
+/* Transition design with the mouse on each email-preview */
+
+.email-preview:hover .email-preview-sent-at {
+  display: none;
+}
+
+/* .email-preview:hover .delete-email {
+  display: inline;
+  position: absolute;
+  right: 75px;
+  top: 125px;
+  z-index: 2;
+} */
+
+/* 
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ */
+.svg.delete-email{
+  display: inline;
+  position: absolute;
+  right: 75px;
+  top: 125px;
+  z-index: 2;
 }

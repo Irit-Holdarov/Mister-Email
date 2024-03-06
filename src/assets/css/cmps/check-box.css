@@ -4,7 +4,7 @@
   cursor: pointer;
   position: relative;
   z-index: 1;
-  accent-color: gray;
+  accent-color:#c4c7c5;
 }
 
 .check-box .checkbox-text {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { CgMailReply } from "react-icons/cg";
 
 import { emailService } from "../services/email.service"
 
@@ -47,7 +47,7 @@ export function EmailDetails() {
   return (
     <section className="email-details">
       <Link to='/email/:folder' title="Go Back" className="go-back">
-        <FaArrowLeftLong />
+        <CgMailReply />
       </Link>
 
       <header className="head-email">

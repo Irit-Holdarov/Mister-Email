@@ -28,15 +28,21 @@ export function EmailIndex() {
 
   async function onRemoveEmail(emailId) {
     try {
-
       await emailService.remove(emailId)
-
       setEmails((prevEmails) => {
         return prevEmails.filter(email => email.id != emailId)
       })
-
     } catch (err) {
       console.log("Error in onRemoveEmail", err)
+    }
+  }
+
+  async function onApdateEmail(email){
+    try{
+      const updateEmail = await emailService.save(email)
+      setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
+    } catch(err){
+      console.log("Error in onApdateEmail", err)
     }
   }
 
@@ -48,8 +54,12 @@ export function EmailIndex() {
       <SideBar />
       {/* צריך לעשות תנאי שאם לוחצים על איידי מסוים כלומר יש איידי בנתיב אז שיעבור לאיידי ואם לא אז שיציג את הרשימה */}
       {/* <EmailList emails={emails} /> <Outlet /> */}
-
-      <EmailList emails={emails} onRemoveEmail={onRemoveEmail} />
+      
+      <EmailList 
+      emails={emails} 
+      onRemoveEmail={onRemoveEmail} 
+      onApdateEmail={onApdateEmail}/>
+      <Outlet />
     </div>
   )
 }

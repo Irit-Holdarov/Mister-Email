@@ -19,7 +19,7 @@ export function EmailDetails() {
 
   async function loadEmail() {
     try {
-      const email = await emailService.getById(params.mailId)
+      const email = await emailService.getById(params.emailId)
       setEmail(email)
     } catch (err) {
       navigate('/email/:folder')

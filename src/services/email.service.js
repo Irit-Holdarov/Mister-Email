@@ -7,6 +7,7 @@ export const emailService = {
     remove,
     getById,
     createEmail,
+    getDefaultFilter,
     _createEmails
 }
 
@@ -55,6 +56,17 @@ function save(emailToSave) {
     }
 }
 
+function getDefaultFilter(){
+    return {
+        subject: '',
+        body:'',
+        isRead: false,
+        isStarred: false,
+        from: '',
+        to: '',
+    }
+}
+
 function createEmail(subject = '', body = '', to = '') {
     return {
         id: utilService.makeId(),
@@ -96,7 +108,6 @@ function _createEmails() {
                 to: 'irit.holdarov@gmail.com',
             },
             {
-                //I sent to momo
                 id: 'e103',
                 subject: 'I Love You!',
                 body: 'I would love to meet sometime',
@@ -117,7 +128,36 @@ function _createEmails() {
                 removedAt: null,
                 from: 'angel@angel.com',
                 to: 'irit.holdarov@gmail.com',
-            }
+            },
+            {
+                id: 'e105',
+                subject: 'BayYour account is being used from a new device',
+                body: `Hi Irit,
+                Signed in to your Netflix account from a new device,
+                If it is you or one of your household members:
+                pleasant viewing!
+                If it is someone else:
+                It is important to remember that the use of your account is allowed only to members of your household`,
+                isRead: false,
+                isStarred: true,
+                sentAt: 1684230420000,
+                removedAt: null,
+                from: 'Netflix@Netflix.com',
+                to: 'irit.holdarov@gmail.com',
+            },
+            {
+                id: 'e106',
+                subject: 'Accepting a purchase on Wolt',
+                body: `Irit, how nice that you ordered. Here is your receipt:
+
+                Nate Cookie 🍪 | Tel Aviv`,
+                isRead: true,
+                isStarred: false,
+                sentAt: 1708608120000,
+                removedAt: null,
+                from: 'wolt@wolt.com',
+                to: 'irit.holdarov@gmail.com',
+            },
 
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)

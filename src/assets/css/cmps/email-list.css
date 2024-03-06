@@ -22,9 +22,11 @@ ul.email-list {
 .unread-mail{
   font-weight: bold;
   cursor: pointer;
+  background-color: white;
 }
 
 .read-mail{
   font-weight: normal;
   cursor: pointer;
+  background-color: #f6f8fc
 }

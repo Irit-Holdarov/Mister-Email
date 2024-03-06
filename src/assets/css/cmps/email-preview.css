@@ -1,15 +1,17 @@
 .email-preview {
   font-weight: bold;
+  background-color: #f6f8fc;
   border: 1px solid transparent;
   padding: 0 13px;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 31px 42px 1fr;
+  grid-template-columns: 31px 32px 1fr;
   margin: 3px;
   font-size: 14px;
   position: relative;
   z-index: 1;
 }
+
 
 /* star */
 .star-marker{
@@ -23,6 +25,7 @@
 
 .read.email-preview {
   font-weight: normal;
+  background-color: white
 }
 
 .email-preview:hover {
@@ -39,7 +42,7 @@ a.email-link {
 
 .email-link-grid {
   display: grid;
-  grid-template-columns: 236px 300px auto;
+  grid-template-columns: 90px 100px auto 74px;
 }
 
 /* Sent At */

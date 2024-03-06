@@ -20,10 +20,10 @@ export function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<AboutAs />} />
                         <Route path="/email/:folder" element={<EmailIndex />}>
-                            {/* <Route path="/email/:folder/:details" element={ <EmailDetails /> }/> */}
+                            <Route path="/email/:folder/:emailId" element={ <EmailDetails /> }/>
                         </Route>
 
-                        <Route path="/email/:folder/:mailId" element={<EmailDetails />} />
+                        {/* <Route path="/email/:folder/:emailId" element={<EmailDetails />} /> */}
 
                     </Routes>
                 </main>

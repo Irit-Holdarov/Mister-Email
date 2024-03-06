@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useParams } from "react-router-dom"
 
 import { emailService } from "../services/email.service"
 
@@ -10,10 +10,12 @@ import { SideBar } from "../cmps/SideBar"
 export function EmailIndex() {
   const [emails, setEmails] = useState(null)
 
+  const params = useParams()
+  console.log(params)
+
   useEffect(() => {
     loadEmails()
   }, [])
-
 
 
   async function loadEmails() {
@@ -52,14 +54,13 @@ export function EmailIndex() {
     <div className="email-index">
       <AppEmailHeader />
       <SideBar />
-      {/* צריך לעשות תנאי שאם לוחצים על איידי מסוים כלומר יש איידי בנתיב אז שיעבור לאיידי ואם לא אז שיציג את הרשימה */}
-      {/* <EmailList emails={emails} /> <Outlet /> */}
-      
+
+      {params.emailId && <Outlet />}
+      {!params.emailId &&  
       <EmailList 
       emails={emails} 
       onRemoveEmail={onRemoveEmail} 
-      onApdateEmail={onApdateEmail}/>
-      <Outlet />
+      onApdateEmail={onApdateEmail}/>}
     </div>
   )
 }

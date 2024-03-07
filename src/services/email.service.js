@@ -13,7 +13,7 @@ export const emailService = {
 
 const STORAGE_KEY = 'emails'
 
-const loggedinUser = {
+var loggedinUser = {
     email: 'irit.holdarov@gmail.com',
     fullname: 'Irit Holdarov',
 };

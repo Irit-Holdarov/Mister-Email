@@ -43,6 +43,7 @@
   background-color: rgba(32, 33, 36, 0.059);
 }
 
+.item-content:focus,
 .item-content:active {
   background-color: #d2e3fc;
   color: #001d35;

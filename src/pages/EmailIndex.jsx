@@ -48,11 +48,11 @@ export function EmailIndex() {
     }
   }
 
-  async function onApdateEmail(email){
-    try{
+  async function onApdateEmail(email) {
+    try {
       const updateEmail = await emailService.save(email)
       setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
-    } catch(err){
+    } catch (err) {
       console.log("Error in onApdateEmail", err)
     }
   }
@@ -66,11 +66,11 @@ export function EmailIndex() {
       <SideBar />
 
       {params.emailId && <Outlet />}
-      {!params.emailId &&  
-      <EmailList 
-      emails={emails} 
-      onRemoveEmail={onRemoveEmail} 
-      onApdateEmail={onApdateEmail}/>}
+      {!params.emailId &&
+        <EmailList
+          emails={emails}
+          onRemoveEmail={onRemoveEmail}
+          onApdateEmail={onApdateEmail} />}
     </div>
   )
 }

@@ -29,7 +29,7 @@ a.email-link {
 
 .email-link-grid {
   display: grid;
-  grid-template-columns: 90px 100px 1fr 74px;
+  grid-template-columns: 90px 100px 1fr;
 }
 
 .read.email-preview {

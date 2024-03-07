@@ -10,9 +10,9 @@ import { IoMailOpen } from "react-icons/io5";
 import { IoMdMailUnread } from "react-icons/io";
 
 
-export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveEmail ,onApdateEmail }) {
+export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveEmail, onApdateEmail }) {
 
-  const params =useParams()
+  const params = useParams()
 
   function formattedDate(sentAt) {
     const date = new Date(sentAt);
@@ -42,11 +42,11 @@ export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveE
     <article className={`email-preview grid ${email.isRead ? 'read' : ''}`}>
       <div className="email-actions-start grid">
 
-      <CheckBox email={email} />
+        <CheckBox email={email} />
 
-      <GoStarFill className={`star-marker ${email.isStarred ? 'star-marked' : ''}`}
-        onClick={() => { onUpdateStar(email) }} />
-        </div>
+        <GoStarFill className={`star-marker ${email.isStarred ? 'star-marked' : ''}`}
+          onClick={() => { onUpdateStar(email) }} />
+      </div>
 
       <Link to={`/email/${params.folder}/${email.id}`} className="email-link">
         <div className="email-link-grid">

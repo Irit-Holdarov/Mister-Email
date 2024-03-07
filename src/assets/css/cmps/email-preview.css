@@ -4,7 +4,6 @@
   height: 40px;
   border: 1px solid transparent;
   padding: 0 13px;
-  /* display: grid; */
   grid-template-columns: 70px 1fr 70px;
   font-size: 14px;
   position: relative;
@@ -12,10 +11,7 @@
   align-items: center;
 }
 
-
-
 .email-preview:hover {
-  /* grid-template-columns: 35px 35px 1fr 70px; */
   box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
     0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
   cursor: pointer;
@@ -75,38 +71,4 @@ a.email-link {
   padding-left: 27px;
 }
 
-
-/* remove */
-.email-actions-delete-email{
-  cursor: pointer;
-}
-
-/* read-unread */
-.email-actions-unread-mail{
-  font-weight: bold;
-  cursor: pointer;
-  background-color: white;
-}
-
-.email-actions-read-mail{
-  font-weight: normal;
-  cursor: pointer;
-  background-color: #f6f8fc;
-}
-
-
-/* Transition design with the mouse on each email-preview */
-
-.email-preview:hover .email-preview-sent-at {
-  display: none;
-}
-
-.email-actions{
-  display: none;
-}
-
-.email-preview:hover .email-actions{
-  display: grid;
-  grid-auto-flow: column;
-}
 

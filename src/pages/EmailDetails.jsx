@@ -75,8 +75,6 @@ export function EmailDetails() {
           <div className="email-details-to-name">{senderNameTo(email.to)}</div>
         </div>
 
-       
-
         <div className="email-details-sent-at">{timeForDate(email.sentAt)}</div>
       </div>
 

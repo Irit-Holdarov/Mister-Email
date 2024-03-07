@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
+import { useParams } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 
 import { CheckBox } from "./CheckBox";
-
-import { IoTrashOutline } from "react-icons/io5";
-import { IoMailOpen } from "react-icons/io5";
-import { IoMdMailUnread } from "react-icons/io";
+import { EmailActions } from "./EmailActions";
 
 
-export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveEmail, onApdateEmail }) {
+
+export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail }) {
 
   const params = useParams()
 
@@ -20,22 +18,9 @@ export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveE
     return date.toLocaleDateString('en-GB', options);
   }
 
-
   function senderName() {
     return email.from.split('@')[0]
   }
-
-
-  function renderReadUnreadIcon(email) {
-    return email.isRead ? (
-      <IoMdMailUnread className="email-actions-read-mail"
-        onClick={() => onApdateEmail({ ...email, isRead: false })} />
-    ) : (
-      <IoMailOpen className="email-actions-unread-mail"
-        onClick={() => onApdateEmail({ ...email, isRead: true })} />
-    )
-  }
-
 
 
   return (
@@ -55,16 +40,9 @@ export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveE
           <div className="email-preview-body">{email.body}</div>
         </div>
       </Link>
+
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>
-      <div className="email-actions">
-        {/* remove */}
-        <IoTrashOutline className="email-actions-delete-email"
-          onClick={() => onRemoveEmail(email.id)} />
-
-        {/* read-unread */}
-        {renderReadUnreadIcon(email)}
-      </div>
-
+      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email} />
 
     </article>
   )

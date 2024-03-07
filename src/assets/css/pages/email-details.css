@@ -14,18 +14,21 @@
   color: white
 }
 
+.go-back {
+  font-size: 22px;
+  color: grey;
+}
+
 .email-details-subject {
   font-size: 1.375rem;
   font-family: inherit;
+  padding-bottom: 25px;
 }
 
-.email-details-sent-at {
-  font-size: 70%;
-  color: grey;
-  display: flex;
-  justify-content: flex-end;
-  grid-area: sent-at;
-  padding-top: 10px;
+.head-email {
+  display: grid;
+  grid-template-areas: "img email-info sent-at";
+  grid-template-columns: 56px auto 151px;
 }
 
 .user-img {
@@ -35,8 +38,9 @@
 }
 
 
-.email-details-from span {
-  color: gray;
+.email-from-container {
+  grid-area: email-info;
+  padding-top: 10px;
 }
 
 .email-details-from-name {
@@ -45,20 +49,6 @@
   font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: 0.875rem;
 }
-
-
-.head-email {
-  display: grid;
-  grid-template-areas: "img email-info sent-at";
-  grid-template-columns: 56px auto 151px;
-}
-
-.email-from-container {
-  grid-area: email-info;
-  padding-top: 10px;
-}
-
-
 
 .email-details-from {
   white-space: nowrap;
@@ -74,14 +64,19 @@
   line-height: 20px;
 }
 
+.email-details-sent-at {
+  font-size: 70%;
+  color: grey;
+  display: flex;
+  justify-content: flex-end;
+  grid-area: sent-at;
+  padding-top: 10px;
+}
+
+
 .email-details-body {
   font-family: sans-serif;
   padding-top: 40px;
   font-size: 13px;
   width: 81%;
-}
-
-.go-back {
-  font-size: 22px;
-  color: grey;
 }

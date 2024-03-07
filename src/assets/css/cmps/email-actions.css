@@ -1,0 +1,35 @@
+/* remove */
+.email-actions-delete-email{
+  cursor: pointer;
+}
+
+/* read-unread */
+.email-actions-unread-mail{
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+}
+
+.email-actions-read-mail{
+  font-weight: normal;
+  cursor: pointer;
+  background-color: #f6f8fc;
+}
+
+
+
+/* Transition design with the mouse on each email-preview */
+
+.email-preview:hover .email-preview-sent-at {
+  display: none;
+}
+
+.email-actions{
+  display: none;
+}
+
+.email-preview:hover .email-actions{
+  display: grid;
+  grid-auto-flow: column;
+}
+

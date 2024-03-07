@@ -29,7 +29,7 @@ export function SideBar() {
       </div>
 
       <div className="side-bar-items">
-      {sidebarItems.map((item, index) => (
+        {sidebarItems.map((item, index) => (
           <SideBarItem key={index} {...item} />
         ))}
       </div>
@@ -42,14 +42,14 @@ export function SideBar() {
 export function SideBarItem({ to, imgSrc, altText, name }) {
   return (
     <Link className={`item-content item-content-${name.toLowerCase()}`}
-     to={to}>
+      to={to}>
       <span className="icon-item">
         <img src={imgSrc} alt={altText} />
       </span>
       <span className="name-item">
         {name}
       </span>
-      
+
     </Link>
   );
 }

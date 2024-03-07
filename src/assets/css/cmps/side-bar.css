@@ -1,9 +1,9 @@
 .side-bar {
   grid-area: sidebar;
-padding-right: 16px;
+  padding-right: 16px;
 }
 
-.side-bar-compose{
+.side-bar-compose {
   padding: 0 24px 0 20px;
   height: 49px;
   margin: 8px 0 16px 8px;
@@ -27,8 +27,7 @@ padding-right: 16px;
   flex-direction: column;
 }
 
-.item-content{
- 
+.item-content {
   align-items: center;
   display: flex;
   height: 32px;
@@ -40,8 +39,19 @@ padding-right: 16px;
 }
 
 .item-content:hover {
+  text-decoration: none;
+  background-color: rgba(32, 33, 36, 0.059);
+}
+
+.item-content:active {
   background-color: #d2e3fc;
   color: #001d35;
   font-weight: 700;
-  text-decoration: none
+  text-decoration: none;
+}
+
+.icon-item {
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
 }

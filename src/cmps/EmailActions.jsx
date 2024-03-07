@@ -17,7 +17,7 @@ export function EmailActions({ onRemoveEmail, onApdateEmail, email }) {
 
 
   return (
-    <section className="email-actions">
+  
       <div className="email-actions">
         {/* remove */}
         <IoTrashOutline className="email-actions-delete-email"
@@ -26,6 +26,6 @@ export function EmailActions({ onRemoveEmail, onApdateEmail, email }) {
         {/* read-unread */}
         {renderReadUnreadIcon(email)}
       </div>
-    </section>
+
   )
 }

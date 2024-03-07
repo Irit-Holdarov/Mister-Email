@@ -40,9 +40,11 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
           <div className="email-preview-body">{email.body}</div>
         </div>
       </Link>
-
+      
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>
-      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email} />
+      
+      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email}/>
+
 
     </article>
   )

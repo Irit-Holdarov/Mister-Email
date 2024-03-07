@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { IoMdArrowBack } from "react-icons/io";
 import user from "../assets/imgs/user.png"
 import { emailService } from "../services/email.service"
+import { EmailActions } from "../cmps/EmailActions";
 
 
 export function EmailDetails() {
@@ -61,6 +62,9 @@ export function EmailDetails() {
         <Link to={`/email/${params.folder}`} title="Go Back" className="go-back">
           <IoMdArrowBack />
         </Link>
+
+        {/* add here but the display is none  */}
+        {/* <EmailActions className="email-details-email-actions"/> */}
       </div>
       
       <div className="email-details-subject">{email.subject}</div>

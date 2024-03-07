@@ -19,6 +19,10 @@
   color: grey;
 }
 
+.email-details-email-actions{
+  display: grid;
+}
+
 .email-details-subject {
   font-size: 1.375rem;
   font-family: inherit;

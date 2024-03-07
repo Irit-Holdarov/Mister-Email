@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 
-export function CheckBox({ email }) { // I can use the email prop here as needed
+export function CheckBox() { // I can use the email prop here as needed
   const [isChecked, setIsChecked] = useState(false)
 
   function handleCheckboxChange() {

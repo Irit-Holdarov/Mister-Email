@@ -62,18 +62,23 @@ export function EmailDetails() {
           <IoMdArrowBack />
         </Link>
       </div>
-
+      
       <div className="email-details-subject">{email.subject}</div>
 
-      <img className="user-img" src={user} alt="user-img" />
+      <div className="head-email">
+        <img className="user-img" src={user} alt="user-img" />
 
-      <div className="email-details-from-name">{senderNameFrom(email.to)} </div>
+        <div className="email-from-container">
+          <span className="email-details-from-name">{senderNameFrom(email.to)} </span>
+          <span className="email-details-from">&lt;{email.from}&gt;</span>
 
-      <div className="email-details-from">&lt;{email.from}&gt;</div>
+          <div className="email-details-to-name">{senderNameTo(email.to)}</div>
+        </div>
 
-      <div className="email-details-to-name">{senderNameTo(email.to)}</div>
+       
 
-      <div className="email-details-sent-at">{timeForDate(email.sentAt)}</div>
+        <div className="email-details-sent-at">{timeForDate(email.sentAt)}</div>
+      </div>
 
       <div className="email-details-body">{email.body}</div>
 

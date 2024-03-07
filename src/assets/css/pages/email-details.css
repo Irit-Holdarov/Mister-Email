@@ -24,11 +24,14 @@
   color: grey;
   display: flex;
   justify-content: flex-end;
+  grid-area: sent-at;
+  padding-top: 10px;
 }
 
 .user-img {
   border-radius: 100%;
   padding: 10px 0;
+  grid-area: img;
 }
 
 
@@ -44,9 +47,20 @@
 }
 
 
+.head-email {
+  display: grid;
+  grid-template-areas: "img email-info sent-at";
+  grid-template-columns: 56px auto 151px;
+}
+
+.email-from-container {
+  grid-area: email-info;
+  padding-top: 10px;
+}
+
+
 
 .email-details-from {
-  padding-top: 13px;
   white-space: nowrap;
   font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: .75rem;

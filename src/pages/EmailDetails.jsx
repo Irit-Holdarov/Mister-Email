@@ -9,7 +9,7 @@ import { emailService } from "../services/email.service"
 export function EmailDetails() {
   const [email, setEmail] = useState(null)
   const params = useParams()
-  console.log(params)
+  console.log('params:', params)
 
   const navigate = useNavigate()
 
@@ -21,9 +21,11 @@ export function EmailDetails() {
   async function loadEmail() {
     try {
       const email = await emailService.getById(params.emailId)
+      email.isRead = true
+      emailService.save(email)
       setEmail(email)
     } catch (err) {
-      navigate('/email/:folder')
+      navigate(`/email/${params.folder}`)
       console.log('Error in loadEmail', err)
     }
   }
@@ -47,8 +49,8 @@ export function EmailDetails() {
   if (!email) return <div>Loading...</div>
   return (
     <section className="email-details">
-      <div className="tool-bar">
-        <Link to='/email/:folder' title="Go Back" className="go-back">
+      <div className="email-details-tool-bar">
+        <Link to={`/email/${params.folder}`} title="Go Back" className="go-back">
           <IoMdArrowBack /> 
         </Link>
 

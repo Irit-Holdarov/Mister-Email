@@ -4,10 +4,10 @@ import { EmailPreview } from "./EmailPreview";
 
 export function EmailList({ emails, onRemoveEmail, onApdateEmail}) {
 
-  function onUpdateReadEmail(email){
-    const newEmail = {...email, isRead: true}
-    onApdateEmail(newEmail)
-  }
+  // function onUpdateReadEmail(email){
+  //   const newEmail = {...email, isRead: true}
+  //   onApdateEmail(newEmail)
+  // }
 
 
   function onUpdateStar(email){
@@ -25,7 +25,7 @@ export function EmailList({ emails, onRemoveEmail, onApdateEmail}) {
             <EmailPreview 
             email={email} 
             onUpdateStar={onUpdateStar} 
-            onUpdateReadEmail={onUpdateReadEmail}
+            // onUpdateReadEmail={onUpdateReadEmail}
             onRemoveEmail={onRemoveEmail}
             onApdateEmail={onApdateEmail}
             />

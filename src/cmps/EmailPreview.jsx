@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { GoStarFill } from "react-icons/go";
 
@@ -10,6 +11,8 @@ import { IoMdMailUnread } from "react-icons/io";
 
 
 export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveEmail ,onApdateEmail }) {
+
+  const params =useParams()
 
   function formattedDate(sentAt) {
     const date = new Date(sentAt);
@@ -45,13 +48,11 @@ export function EmailPreview({ email, onUpdateStar, onUpdateReadEmail, onRemoveE
         onClick={() => { onUpdateStar(email) }} />
         </div>
 
-      <Link to={`/email/:folder/${email.id}`} className="email-link"
-        onClick={() => { onUpdateReadEmail(email) }}>
+      <Link to={`/email/${params.folder}/${email.id}`} className="email-link">
         <div className="email-link-grid">
           <div className="email-preview-from-name">{senderName(email.from)}</div>
           <div className="email-preview-subject">{email.subject}</div>
           <div className="email-preview-body">{email.body}</div>
-          {/* <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div> */}
         </div>
       </Link>
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>

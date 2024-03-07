@@ -18,8 +18,13 @@ export function EmailIndex() {
   const params = useParams()
 
   useEffect(() => {
+    console.log('load mails');
     loadEmails()
   }, [])
+  useEffect(() => {
+    console.log('load mails for params');
+    loadEmails()
+  }, [params])
 
 
   async function loadEmails() {

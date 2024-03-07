@@ -14,29 +14,4 @@ ul.email-list {
   border-radius: 25px;
 }
 
-/* remove */
 
-.delete-email{
-  cursor: pointer;
-  display: none;
-}
-
-/* read-unread */
-.unread-mail{
-  font-weight: bold;
-  cursor: pointer;
-  background-color: white;
-  display: none;
-}
-
-.read-mail{
-  font-weight: normal;
-  cursor: pointer;
-  background-color: #f6f8fc;
-  display: none;
-}
-
-
-.email-preview:hover .email-preview-sent-at{
-  display: none;
-}

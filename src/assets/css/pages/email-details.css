@@ -1,8 +1,12 @@
 .email-details {
-  padding: 30px;
+  padding: 10px 30px 0;
   height: 100%;
   background: white;
   border-radius: 25px;
+}
+
+.tool-bar{
+  padding-bottom: 20px;
 }
 
 .head-email{
@@ -21,7 +25,7 @@
 }
 
 .email-details-sent-at {
-  font-size: 90%;
+  font-size: 70%;
   color: grey;
   display: flex;
   justify-content: flex-end;

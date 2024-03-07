@@ -21,17 +21,31 @@ const loggedinUser = {
 _createEmails()
 
 
-async function query() {
+// async function query() {
+//     const emails = await storageService.query(STORAGE_KEY);
+//     return emails;
+// }
+
+async function query(filterBy) {
     const emails = await storageService.query(STORAGE_KEY);
+    if(filterBy)
     return emails;
 }
 
 // async function query(filterBy) {
-//     const emails = await storageService.query(STORAGE_KEY);
-//     if(filterBy){
-//         var {txt, isRead, isStarred} = filterBy
 
+//     const emails = await storageService.query(STORAGE_KEY);
+//     if (filterBy) {
+//         var { txt, isRead, isStarred } = filterBy
+//         if(txt) {
+//             emails.filter(mail => {
+                
+//             })
 //         }
+//         emails.filter(email => {
+
+//         })
+//     }
 //     return emails;
 // }
 
@@ -52,7 +66,7 @@ function save(emailToSave) {
     }
 }
 
-function getDefaultFilter(){
+function getDefaultFilter() {
     return {
         txt: '',
         isRead: null,

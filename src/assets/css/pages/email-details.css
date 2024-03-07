@@ -28,7 +28,11 @@
 }
 
 
-span{
+.email-details-from span{
+  color: gray;
+}
+
+.email-details-to span{
   color: gray;
 }
 
@@ -50,5 +54,5 @@ span{
 
 .go-back{
   font-size: 22px;
-  
+  color: grey;
 }

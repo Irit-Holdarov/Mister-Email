@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { CgMailReply } from "react-icons/cg";
+import { IoMdArrowBack } from "react-icons/io";
 
 import { emailService } from "../services/email.service"
 
@@ -48,7 +49,7 @@ export function EmailDetails() {
     <section className="email-details">
       <div className="tool-bar">
         <Link to='/email/:folder' title="Go Back" className="go-back">
-          <CgMailReply />
+          <IoMdArrowBack /> 
         </Link>
 
         

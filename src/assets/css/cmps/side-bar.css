@@ -1,4 +1,47 @@
 .side-bar {
   grid-area: sidebar;
-  padding: 20px;
+padding-right: 16px;
+}
+
+.side-bar-compose{
+  padding: 0 24px 0 20px;
+  height: 49px;
+  margin: 8px 0 16px 8px;
+  align-items: center;
+  background-color: #c2e7ff;
+  border-radius: 16px;
+  display: -webkit-inline-flex;
+  font-weight: 500;
+  gap: 12px;
+}
+
+.side-bar-compose:hover {
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.side-bar-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-content{
+ 
+  align-items: center;
+  display: flex;
+  height: 32px;
+  padding: 0 12px 0 26px;
+  transition: margin .15s cubic-bezier(0.4, 0, 0.2, 1), padding .15s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 16px 16px 0;
+  font-weight: 400;
+
+}
+
+.item-content:hover {
+  background-color: #d2e3fc;
+  color: #001d35;
+  font-weight: 700;
+  text-decoration: none
 }

@@ -18,18 +18,22 @@ export function EmailIndex() {
   const params = useParams()
 
   useEffect(() => {
-    console.log('load mails');
     loadEmails()
   }, [])
-  useEffect(() => {
-    console.log('load mails for params');
-    loadEmails()
-  }, [params])
 
+  useEffect(() => {
+    loadEmails()
+  }, [params, filterBy])
+
+
+  function onSetFilter(fieldsToUpdate) {
+    setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
+  }
 
   async function loadEmails() {
     try {
-      const emails = await emailService.query(filterBy)
+      const emails = await emailService.query({ ...filterBy, status: params.folder })
+      // const emails = await emailService.query(filterBy)
       setEmails(emails)
     } catch (err) {
       console.log('Error in loadEmails', err)
@@ -56,13 +60,22 @@ export function EmailIndex() {
       console.log("Error in onApdateEmail", err)
     }
   }
+  async function onAddEmail(email) {
+    try {
+      const saveEmail = await emailService.save(email)
+      setEmails((prevEmails) =>[...prevEmails, saveEmail] )
+    } catch (err) {
+      console.log("Error in onAddEmail", err)
+    }
+  }
+
 
   console.log('emails:', emails)
   if (!emails) return <div>Loading...</div>
   return (
     <div className="email-index">
       <AppEmailHeader />
-      <EmailFilter />
+      <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <SideBar />
 
       {params.emailId && <Outlet />}
@@ -70,7 +83,13 @@ export function EmailIndex() {
         <EmailList
           emails={emails}
           onRemoveEmail={onRemoveEmail}
-          onApdateEmail={onApdateEmail} />}
+          onApdateEmail={onApdateEmail}
+        />}
+
+      {/* for the EmailEdit */}
+      {/* <Outlet context={{onAddEmail}}/> */}
+
+
     </div>
   )
 }

@@ -9,13 +9,12 @@ import { EmailActions } from "../cmps/EmailActions";
 export function EmailDetails() {
   const [email, setEmail] = useState(null)
   const params = useParams()
-  console.log('params:', params)
 
   const navigate = useNavigate()
 
   useEffect(() => {
     loadEmail()
-  }, [])
+  }, )
 
 
   async function loadEmail() {

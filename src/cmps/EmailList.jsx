@@ -14,7 +14,6 @@ export function EmailList({ emails, onRemoveEmail, onApdateEmail }) {
 
   return (
     <ul className="email-list">
-      <div>Here read/unread</div>
       {
         emails.map(email =>
           <li key={email.id}>

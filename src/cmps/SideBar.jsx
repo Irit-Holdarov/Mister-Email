@@ -21,13 +21,14 @@ const sidebarItems = [
 export function SideBar() {
   return (
     <section className="side-bar">
-      <div className="side-bar-compose">
-        <span>
-          <img src={compose} alt="compose-img" />
-        </span>
-        Compose
-      </div>
-
+      <Link to="/email/edit">
+        <button className="side-bar-compose">
+          <span>
+            <img src={compose} alt="compose-img" />
+          </span>
+          Compose
+        </button>
+      </Link>
       <div className="side-bar-items">
         {sidebarItems.map((item, index) => (
           <SideBarItem key={index} {...item} />

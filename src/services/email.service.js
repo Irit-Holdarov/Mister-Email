@@ -6,9 +6,8 @@ export const emailService = {
     save,
     remove,
     getById,
-    createEmail,
+    getDefualtEmail,
     getDefaultFilter,
-    _createEmails
 }
 
 const STORAGE_KEY = 'emails'
@@ -21,33 +20,76 @@ var loggedinUser = {
 _createEmails()
 
 
-// async function query() {
-//     const emails = await storageService.query(STORAGE_KEY);
-//     return emails;
-// }
-
-async function query(filterBy) {
+async function query() {
     const emails = await storageService.query(STORAGE_KEY);
-    if(filterBy)
-    return emails;
+    return emails
 }
 
+
 // async function query(filterBy) {
-
 //     const emails = await storageService.query(STORAGE_KEY);
-//     if (filterBy) {
-//         var { txt, isRead, isStarred } = filterBy
-//         if(txt) {
-//             emails.filter(mail => {
-                
-//             })
-//         }
-//         emails.filter(email => {
+//      if (filterBy) {
+//          const { status , txt, isRead} = filterBy;
 
-//         })
-//     }
+//          switch (status) {
+//             case 'inbox':
+//               return filterEmails(emails, 'inbox', isRead);
+//             case 'sent':
+//               return filterEmails(emails, 'sent', isRead);
+//             case 'star':
+//               // Implement star filtering logic if needed
+//               break;
+//             case 'trash':
+//               // Implement trash filtering logic if needed
+//               break;
+//             default:
+//               // Handle other cases or return all emails
+//               return emails;
+//           }
+
+//          //Filter for isRead
+//          if (isRead !== null) {
+//             return emails.filter((email) => email.folder === folder && email.isRead === (isRead === "Read"));
+//           } else {
+//             return emails.filter((email) => email.folder === folder);
+//           }
+//         }
+
+
 //     return emails;
 // }
+
+
+// async function query(filterBy) {
+//     const emails = await storageService.query(STORAGE_KEY);
+//     if (filterBy) {
+//         const { status, txt, isRead } = filterBy;
+
+//         // Filter for isRead
+//         if (isRead !== null) {
+//             return emails.filter((email) => {
+//                 const isReadFilter = isRead === "true" ? true : (isRead === "false" ? false : null);
+//                 return email.status === status && (isReadFilter === null || email.isRead === isReadFilter);
+//             });
+//         } else {
+//             return emails.filter((email) => email.status === status);
+//         }
+//     }
+
+//     return emails;
+// }
+
+
+function getDefaultFilter() {
+    return {
+        status: 'inbox',
+        txt: '',
+        isRead: null
+    }
+}
+
+
+
 
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
@@ -66,17 +108,10 @@ function save(emailToSave) {
     }
 }
 
-function getDefaultFilter() {
-    return {
-        txt: '',
-        isRead: null,
-        isStarred: null
-    }
-}
 
-function createEmail(subject = '', body = '', to = '') {
+function getDefualtEmail(subject = '', body = '', to = '') {
     return {
-        id: utilService.makeId(),
+
         subject,
         body,
         isRead: false,
@@ -87,6 +122,19 @@ function createEmail(subject = '', body = '', to = '') {
         to,
     };
 }
+
+
+function _makeId() {
+    const emails = utilService.loadFromStorage(STORAGE_KEY) || [];
+    const lastId = emails.reduce((maxId, email) => {
+        const num = parseInt(email.id.slice(1));
+        return num > maxId ? num : maxId;
+    }, 0);
+    const nextId = lastId + 1;
+
+    return 'e' + nextId;
+}
+
 
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
@@ -165,6 +213,20 @@ function _createEmails() {
                 from: 'wolt@wolt.com',
                 to: 'irit.holdarov@gmail.com',
             },
+            {
+                id: 'e107',
+                subject: 'Security alert',
+                body: `New Windows login. 
+                We've detected a new sign-in to your Google Account on your Windows device.
+                 If you are logged in, there is no need to do anything.
+                  If not, we'll help you secure your account.`,
+                isRead: true,
+                isStarred: true,
+                sentAt: 1718608120000,
+                removedAt: null,
+                from: 'google@accounts.google.com',
+                to: 'irit.holdarov@gmail.com',
+            }
 
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)

@@ -26,7 +26,21 @@ input#search{
   width: 466px;
 }
 
+select.isRead-select{
+  margin-left: 40px;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+
 input {
   border: none;
   height: 35px;
+}
+
+.filter-button{
+  margin-left: 40px;
+  border-radius: 8px;
+  padding: 5px;
+  background: white;
 }

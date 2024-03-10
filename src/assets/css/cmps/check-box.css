@@ -3,7 +3,6 @@
 .check-box {
   cursor: pointer;
   position: relative;
-  z-index: 1;
   accent-color:#c4c7c5;
 }
 
@@ -18,10 +17,11 @@
   color: white;
   white-space: nowrap;
   font-size: 10px;
-  z-index: 2;
   opacity: 1;
   border-radius: 5px;
 }
+
+/* #c2dbff */
 
 .check-box:hover .checkbox-text {
   display: block;
@@ -29,6 +29,6 @@
 
 .check-box input {
   cursor: pointer;
-  position: relative;
-  z-index: 1;
 }
+
+

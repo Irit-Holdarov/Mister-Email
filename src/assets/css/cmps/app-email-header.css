@@ -5,14 +5,9 @@
     grid-area: header;
 }
 
-/* .app-header.container img{
-    padding-top: 15px;
-} */
 .app-header section.container {
     padding: 10px;
-    /* padding-top: 15px; */
 }
-
 
 .app-header section.container img{
     padding-top: 15px;

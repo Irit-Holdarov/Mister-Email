@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 
 import { EmailDetails } from './pages/EmailDetails';
 import { EmailCompose } from './pages/EmailCompose';
+import { UserMsg } from './cmps/UserMsg';
 
 
 
@@ -28,6 +29,7 @@ export function App() {
                     </Routes>
                 </main>
 
+                <UserMsg />
             </section>
         </Router>
 

@@ -40,7 +40,20 @@ export function EmailFilter({ filterBy, onSetFilter }) {
             
           <option value={'null'}>All</option>
           <option value={'true'}>Read</option>
-          <option value={'false'}>Unread</option>
+          <option value={'false'}>Not Read</option>
+        </select>
+      </label>
+
+      <label >
+        <select className="isStarred-select"
+
+          name="isStarred"
+          value={'' + filterByToEdit.isStarred}
+          onChange={handleChange}>
+            
+          <option value={'null'}>All</option>
+          <option value={'true'}>Starred</option>
+          <option value={'false'}>Not starred</option>
         </select>
       </label>
 

@@ -3,14 +3,18 @@ import { IoMailOpen } from "react-icons/io5";
 import { IoMdMailUnread } from "react-icons/io";
 
 
+import readEmail from "../assets/imgs/read_email.png"
+import unreadEmail from "../assets/imgs/unread_email.png"
+import deleteEmil from "../assets/imgs/delete.png"
+
 export function EmailActions({ onRemoveEmail, onApdateEmail, email }) {
 
   function renderReadUnreadIcon(email) {
     return email.isRead ? (
-      <IoMdMailUnread className="email-actions-read-mail"
+      <img src={readEmail} alt="mail read icon" className="email-actions-read-mail"
         onClick={() => onApdateEmail({ ...email, isRead: false })} />
     ) : (
-      <IoMailOpen className="email-actions-unread-mail"
+      <img src={unreadEmail} alt="mail unread icon" className="email-actions-unread-mail"
         onClick={() => onApdateEmail({ ...email, isRead: true })} />
     )
   }
@@ -20,7 +24,7 @@ export function EmailActions({ onRemoveEmail, onApdateEmail, email }) {
   
       <div className="email-actions">
         {/* remove */}
-        <IoTrashOutline className="email-actions-delete-email"
+        <img src={deleteEmil} alt="mail delete icon" className="email-actions-delete-email"
           onClick={() => onRemoveEmail(email.id)} />
 
         {/* read-unread */}

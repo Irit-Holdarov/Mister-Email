@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Outlet, useParams } from "react-router-dom"
+import { Outlet, useParams, useSearchParams } from "react-router-dom"
 
 import { emailService } from "../services/email.service"
 
@@ -9,8 +9,13 @@ import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
 
 export function EmailIndex() {
+
+  const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
+  // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
+
+
 
   console.log(filterBy)
 
@@ -22,6 +27,7 @@ export function EmailIndex() {
   }, [])
 
   useEffect(() => {
+    // setSearchParams(filterBy)
     loadEmails()
   }, [params, filterBy])
 

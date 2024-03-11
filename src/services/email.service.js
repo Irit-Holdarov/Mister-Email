@@ -8,6 +8,7 @@ export const emailService = {
     getById,
     getDefualtEmail,
     getDefaultFilter,
+    getFilterFromParams
 }
 
 const STORAGE_KEY = 'emails'
@@ -84,8 +85,17 @@ function getDefaultFilter() {
     return {
         status: 'inbox',
         txt: '',
-        isRead: null
+        isRead: null,
+        isStarred: null, 
     }
+}
+
+function getFilterFromParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+    }
+    return filterBy
 }
 
 

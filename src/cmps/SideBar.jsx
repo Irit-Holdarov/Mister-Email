@@ -21,7 +21,9 @@ const sidebarItems = [
 export function SideBar() {
   return (
     <section className="side-bar">
-      <Link to="/email/edit">
+
+{/* <Link to=`/email/${folder}compose`> */} 
+      <Link to="/email/compose">
         <button className="side-bar-compose">
           <span>
             <img src={compose} alt="compose-img" />

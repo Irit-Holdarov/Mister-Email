@@ -86,8 +86,8 @@ export function EmailIndex() {
           onApdateEmail={onApdateEmail}
         />}
 
-      {/* for the EmailEdit */}
-      {/* <Outlet context={{onAddEmail}}/> */}
+      {/* for the EmailCompose */}
+      {/* <Outlet context={{onAddEmail, onApdateEmail}}/> */}
 
 
     </div>

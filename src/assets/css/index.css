@@ -8,7 +8,7 @@
 @import "./pages/home.css";
 @import "./pages/email-index.css";
 @import "./pages/email-details.css";
-@import "./pages/email-edit.css";
+@import "./pages/email-compose.css";
 
 /* Components */
 @import "./cmps/app-email-header.css";

@@ -18,10 +18,10 @@ export function EmailIndex() {
 
   const params = useParams()
 
-  useEffect(()=>{
-    // setSearchParams({compose:'yesssss'})
-    console.log(searchParams.get('compose'));
-  })
+  // useEffect(()=>{
+  //   // setSearchParams({compose:'yesssss'})
+  //   console.log(searchParams.get('compose'));
+  // })
 
 
   useEffect(() => {
@@ -90,9 +90,7 @@ export function EmailIndex() {
           onApdateEmail={onApdateEmail}
         />}
 
-        {isCompose && <EmailCompose/>}
-      {/* for the EmailCompose */}
-      {/* <Outlet context={{onAddEmail, onApdateEmail}}/> */}
+        {isCompose && <EmailCompose onAddEmail={onAddEmail} onApdateEmail={onApdateEmail}/>}
 
     </div>
   )

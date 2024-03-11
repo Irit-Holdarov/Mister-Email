@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { emailService } from "../services/email.service";
 
 
-export function EmailCompose() {
+export function EmailCompose({onAddEmail, onApdateEmail}) {
 
   const [email, setEmail] = useState(emailService.getDefualtEmail)
   const navigate = useNavigate()
@@ -16,32 +16,26 @@ export function EmailCompose() {
 
   const { folder, emailId } = useParams()
 
-  //After I update the changes of the url
-  // useEffect(() => {
-  //   if (emailId) loadEmail()
-  // }, [])
+  useEffect(() => {
+    if (emailId) loadEmail()
+  }, [])
 
 
-  // async function loadEmail() {
-  //   try {
-  //     const email = await emailService.getById(emailId)
-  //     setEmail(email)
-  //   } catch (err) {
-  //     console.log("Had issues loading email", err)
-  //   }
-  // }
-
-
+  async function loadEmail() {
+    try {
+      const email = await emailService.getById(emailId)
+      setEmail(email)
+    } catch (err) {
+      console.log("Had issues loading email", err)
+    }
+  }
 
 
 
   console.log("email", email)
 
   function handelChange({ target }) {
-    const { type, value, name: field } = target
-    // console.log('field:', field)
-    // console.log('value:', value)
-
+    const {  value, name: field } = target
     setEmail(prevEmail => ({ ...prevEmail, [field]: value }))
   }
 
@@ -49,9 +43,8 @@ export function EmailCompose() {
   async function onSaveEmail(ev) {
     ev.preventDefault()
     try {
-      if(email.id) await context.onApdateEmail(email)
-      else await context.onAddEmail(email)
-      //QQQQQQQQQQQQQQQ In the url above, change to #/email/undefined
+      if(email.id) await onApdateEmail(email)
+      else await onAddEmail(email)
       navigate(`/email/${folder}`)
     } catch (err) {
       console.log("Had issues saving email", err)

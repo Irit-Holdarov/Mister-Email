@@ -116,9 +116,9 @@ function getDefualtEmail(subject = '', body = '', to = '') {
 
         subject,
         body,
-        isRead: false,
+        isRead: true,
         isStarred: false,
-        sentAt: Date.now(), //null 
+        sentAt: null, //null 
         removedAt: null,
         from: loggedinUser.email,
         to,

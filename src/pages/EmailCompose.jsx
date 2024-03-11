@@ -39,8 +39,8 @@ export function EmailCompose() {
 
   function handelChange({ target }) {
     const { type, value, name: field } = target
-    console.log('field:', field)
-    console.log('value:', value)
+    // console.log('field:', field)
+    // console.log('value:', value)
 
     setEmail(prevEmail => ({ ...prevEmail, [field]: value }))
   }
@@ -52,7 +52,7 @@ export function EmailCompose() {
       if(email.id) await context.onApdateEmail(email)
       else await context.onAddEmail(email)
       //QQQQQQQQQQQQQQQ In the url above, change to #/email/undefined
-      navigate(`/email/${params.folder}`)
+      navigate(`/email/${folder}`)
     } catch (err) {
       console.log("Had issues saving email", err)
     }
@@ -64,9 +64,9 @@ export function EmailCompose() {
 
       <div className="email-compose-tool-bar">
         <div>New Message</div>
-        {/* <Link  to={`/email${folder}`}> */}
+        <Link  to={`/email/${folder}`}>
         <button className="close-btn">X</button>
-        {/* </Link> */}
+        </Link>
       </div>
 
       <form onSubmit={onSaveEmail}>

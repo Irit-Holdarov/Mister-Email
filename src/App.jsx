@@ -21,14 +21,11 @@ export function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<AboutAs />} />
                         <Route path="/email/:folder" element={<EmailIndex />}>
-                            {/* <Route path="email/compose" element={<EmailCompose />}/> */}
-                            <Route path="/email/:folder/:emailId?" element={ <EmailDetails /> }/>
+                            <Route path="/email/:folder/:emailId" element={ <EmailDetails /> }/>
                         </Route>
                         
-                        <Route path="email/compose" element={<EmailCompose />}/>
                     </Routes>
                 </main>
-
                 <UserMsg />
             </section>
         </Router>

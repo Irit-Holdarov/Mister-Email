@@ -21,64 +21,50 @@ var loggedinUser = {
 _createEmails()
 
 
-async function query() {
-    const emails = await storageService.query(STORAGE_KEY);
+async function query(filterBy) {
+    console.log(filterBy);
+    let emails = await storageService.query(STORAGE_KEY);
+
+    if (filterBy.txt) {
+        emails = emails.filter(email => {
+            return filterBy.txt.includes(email.subject.toLowerCase()) || filterBy.txt.includes(email.from.toLowerCase())
+                || filterBy.txt.includes(email.body.toLowerCase())
+        })
+    }
+
+    if (filterBy.isRead !== null) {
+        emails = emails.filter(email => email.isRead === filterBy.isRead)
+    }
+
+    if (filterBy.isStarred !== null) {
+        emails = emails.filter(email => email.isStarred === filterBy.isStarred)
+    }
+
+
+    if (filterBy.status) {
+        switch (filterBy.status) {
+            case 'inbox':
+                emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt); 
+                break;
+            case 'sent':
+                emails = emails.filter(email => email.from === loggedinUser.email && !email.removedAt);
+                break;
+            case 'starred':
+                emails = emails.filter(email => email.isStarred);
+                break;
+            case 'drafts':
+                emails = emails.filter(email => !email.sentAt);
+                break;
+            case 'trash':
+                emails = emails.filter(email => email.removedAt);
+                break;
+            default:
+                break;
+        }
+    }
+
     return emails
 }
-
-
-// async function query(filterBy) {
-//     const emails = await storageService.query(STORAGE_KEY);
-//      if (filterBy) {
-//          const { status , txt, isRead} = filterBy;
-
-//          switch (status) {
-//             case 'inbox':
-//               return filterEmails(emails, 'inbox', isRead);
-//             case 'sent':
-//               return filterEmails(emails, 'sent', isRead);
-//             case 'star':
-//               // Implement star filtering logic if needed
-//               break;
-//             case 'trash':
-//               // Implement trash filtering logic if needed
-//               break;
-//             default:
-//               // Handle other cases or return all emails
-//               return emails;
-//           }
-
-//          //Filter for isRead
-//          if (isRead !== null) {
-//             return emails.filter((email) => email.folder === folder && email.isRead === (isRead === "Read"));
-//           } else {
-//             return emails.filter((email) => email.folder === folder);
-//           }
-//         }
-
-
-//     return emails;
-// }
-
-
-// async function query(filterBy) {
-//     const emails = await storageService.query(STORAGE_KEY);
-//     if (filterBy) {
-//         const { status, txt, isRead } = filterBy;
-
-//         // Filter for isRead
-//         if (isRead !== null) {
-//             return emails.filter((email) => {
-//                 const isReadFilter = isRead === "true" ? true : (isRead === "false" ? false : null);
-//                 return email.status === status && (isReadFilter === null || email.isRead === isReadFilter);
-//             });
-//         } else {
-//             return emails.filter((email) => email.status === status);
-//         }
-//     }
-
-//     return emails;
-// }
 
 
 function getDefaultFilter() {
@@ -86,7 +72,7 @@ function getDefaultFilter() {
         status: 'inbox',
         txt: '',
         isRead: null,
-        isStarred: null, 
+        isStarred: null,
     }
 }
 
@@ -99,14 +85,20 @@ function getFilterFromParams(searchParams) {
 }
 
 
-
-
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
 }
 
-function remove(id) {
-    return storageService.remove(STORAGE_KEY, id)
+
+async function remove(id) {
+    const email = await storageService.get(STORAGE_KEY, id);
+    if (email.removedAt) {
+        await storageService.remove(STORAGE_KEY, id);
+    } else {
+        email.removedAt = Date.now();
+        await storageService.put(STORAGE_KEY, email);
+    }
+    return email;
 }
 
 function save(emailToSave) {
@@ -126,24 +118,13 @@ function getDefualtEmail(subject = '', body = '', to = '') {
         body,
         isRead: false,
         isStarred: false,
-        sentAt: Date.now(),
+        sentAt: Date.now(), //null 
         removedAt: null,
         from: loggedinUser.email,
         to,
     };
 }
 
-
-function _makeId() {
-    const emails = utilService.loadFromStorage(STORAGE_KEY) || [];
-    const lastId = emails.reduce((maxId, email) => {
-        const num = parseInt(email.id.slice(1));
-        return num > maxId ? num : maxId;
-    }, 0);
-    const nextId = lastId + 1;
-
-    return 'e' + nextId;
-}
 
 
 function _createEmails() {
@@ -236,7 +217,29 @@ function _createEmails() {
                 removedAt: null,
                 from: 'google@accounts.google.com',
                 to: 'irit.holdarov@gmail.com',
-            }
+            },
+            {
+                id: 'e108',
+                subject: 'Hi',
+                body: 'Would you like to talk?',
+                isRead: true,
+                isStarred: true,
+                sentAt: 1679436000000,
+                removedAt: null,
+                from: 'irit.holdarov@gmail.com',
+                to: 'angel@angel.com',
+            }, {
+                id: 'e109',
+                subject: 'Miss you!',
+                body: 'Would love to catch up sometimes',
+                isRead: true,
+                isStarred: false,
+                sentAt: 1680642000000,
+                removedAt: 1679436000000,
+                from: 'irit.holdarov@gmail.com',
+                to: 'momo@momo.com',
+            },
+
 
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)

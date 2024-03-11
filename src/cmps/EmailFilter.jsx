@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 
 export function EmailFilter({ filterBy, onSetFilter }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
+  const params = useParams()
 
-  // useEffect = (()=>{
-  //   onSetFilter(filterByToEdit)    
-  // },[filterByToEdit])
 
+  useEffect(()=>{
+    onSetFilter(filterByToEdit)    
+  },[filterByToEdit, params])
+  
+  
 
   function handleChange(ev) {
     let { value, name: field } = ev.target // ev.target.value  ev.target.name
+
+    const parsingnames =['isStarred', 'isRead' ]
+    if(parsingnames.includes(field)){
+      value = JSON.parse(value)
+    }
+
     setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
   }
-
-
 
 
   return (

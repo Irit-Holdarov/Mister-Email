@@ -7,6 +7,7 @@ import { EmailList } from "../cmps/EmailList"
 import { AppEmailHeader } from "../cmps/AppEmailHeader"
 import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
+import { EmailCompose } from "./EmailCompose"
 
 export function EmailIndex() {
 
@@ -15,16 +16,13 @@ export function EmailIndex() {
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
   // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
 
-
-
-  console.log(filterBy)
-
-
   const params = useParams()
 
-  useEffect(() => {
-    loadEmails()
-  }, [])
+  useEffect(()=>{
+    // setSearchParams({compose:'yesssss'})
+    console.log(searchParams.get('compose'));
+  })
+
 
   useEffect(() => {
     // setSearchParams(filterBy)
@@ -75,7 +73,7 @@ export function EmailIndex() {
     }
   }
 
-
+  const isCompose = searchParams.get('compose')  || null
   console.log('emails:', emails)
   if (!emails) return <div>Loading...</div>
   return (
@@ -92,9 +90,9 @@ export function EmailIndex() {
           onApdateEmail={onApdateEmail}
         />}
 
+        {isCompose && <EmailCompose/>}
       {/* for the EmailCompose */}
       {/* <Outlet context={{onAddEmail, onApdateEmail}}/> */}
-
 
     </div>
   )

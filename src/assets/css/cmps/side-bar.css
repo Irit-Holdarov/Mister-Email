@@ -43,13 +43,13 @@
   background-color: rgba(32, 33, 36, 0.059);
 }
 
-.item-content:focus,
-.item-content:active {
+.item-content.active{
   background-color: #d2e3fc;
   color: #001d35;
   font-weight: 700;
   text-decoration: none;
 }
+
 
 .icon-item {
   width: 20px;

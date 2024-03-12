@@ -52,10 +52,17 @@ function _save(entityType, entities) {
 
 
 
-let nextId = 115;
+// let nextId = 115;
+
+// function _makeId() {
+//     const currentId = nextId++;
+//     return 'e' + currentId;
+// }
+
 
 function _makeId() {
-    const currentId = nextId++;
-    return 'e' + currentId;
+    const nextId = parseInt(localStorage.getItem('nextId')) || 1;
+    localStorage.setItem('nextId', nextId + 1);
+    return 'e' + nextId;
 }
 

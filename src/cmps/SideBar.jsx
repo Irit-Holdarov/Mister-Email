@@ -5,21 +5,30 @@ import starred from "../assets/imgs/starred.png"
 import sent from "../assets/imgs/sent.png"
 import draff from "../assets/imgs/draff.png"
 import trash from "../assets/imgs/delete.png"
-import { Link, useSearchParams } from "react-router-dom"
+import { Link, useParams, useSearchParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 
 export function SideBar() {
 
+  const [searchParams, setSearchParams] = useSearchParams()
+  const params = useParams()
+  const [focusedItem, setFocusedItem] = useState('inbox')
+
+  useEffect(()=>{
+    setFocusedItem(params.folder)
+  },[params.folder])
+
   const sidebarItems = [
     { to: "/email/inbox", imgSrc: inbox, altText: "inbox-img", name: "Inbox" },
-    { to: "/email/starred", imgSrc: starred, altText: "star-img", name: "Starred" },
+    { to: "/email/starred", imgSrc: starred, altText: "star-img", name: "Starred"},
     { to: "/email/sent", imgSrc: sent, altText: "sent-img", name: "Sent" },
     { to: "/email/draff", imgSrc: draff, altText: "draff-img", name: "Draff" },
     { to: "/email/trash", imgSrc: trash, altText: "trash-img", name: "Trash" },
   ];
-  const [searchParams, setSearchParams] = useSearchParams()
 
-  
+
+
   function setQSparams() {
     // setting params
     setSearchParams({ compose: 'new' })
@@ -27,8 +36,6 @@ export function SideBar() {
 
   return (
     <section className="side-bar">
-
-      {/* <Link to=`/email/${folder}compose`> */}
       <div>
         <button onClick={setQSparams} className="side-bar-compose">
           <span>
@@ -39,7 +46,7 @@ export function SideBar() {
       </div>
       <div className="side-bar-items">
         {sidebarItems.map((item, index) => (
-          <SideBarItem key={index} {...item} />
+          <SideBarItem key={index} {...item} isActive={focusedItem === item.name.toLocaleLowerCase()}/>
         ))}
       </div>
 
@@ -48,9 +55,9 @@ export function SideBar() {
 }
 
 
-export function SideBarItem({ to, imgSrc, altText, name }) {
+export function SideBarItem({ to, imgSrc, altText, name ,isActive}) {
   return (
-    <Link className={`item-content item-content-${name.toLowerCase()}`}
+    <Link className={`item-content item-content-${name.toLowerCase()} ${isActive ? 'active' : ''}`}
       to={to}>
       <span className="icon-item">
         <img src={imgSrc} alt={altText} />

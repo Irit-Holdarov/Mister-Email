@@ -10,9 +10,8 @@ import { emailService } from "../services/email.service";
 export function EmailCompose({onAddEmail, onApdateEmail}) {
 
   const [email, setEmail] = useState(emailService.getDefualtEmail)
+  
   const navigate = useNavigate()
-
-  const context = useOutletContext()
 
   const { folder, emailId } = useParams()
 
@@ -31,20 +30,19 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
   }
 
 
-
-  console.log("email", email)
-
   function handelChange({ target }) {
     const {  value, name: field } = target
     setEmail(prevEmail => ({ ...prevEmail, [field]: value }))
   }
 
 
+
   async function onSaveEmail(ev) {
     ev.preventDefault()
     try {
-      if(email.id) await onApdateEmail(email)
-      else await onAddEmail(email)
+      const updateEmail = {...email, sentAt: Date.now()}
+      if(email.id) await onApdateEmail(updateEmail)
+      else await onAddEmail(updateEmail)
       navigate(`/email/${folder}`)
     } catch (err) {
       console.log("Had issues saving email", err)
@@ -52,13 +50,19 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
   }
 
 
+  async function onSaveEmailToDraff() {
+    if (email.to.trim() !== "" || email.subject.trim() !== "" || email.body.trim() !== "") {
+      await onAddEmail(email);
+    }
+  }
+
   return (
     <section className="email-compose">
 
       <div className="email-compose-tool-bar">
         <div>New Message</div>
         <Link  to={`/email/${folder}`}>
-        <button className="close-btn">X</button>
+        <button className="close-btn" onClick={onSaveEmailToDraff}>X</button>
         </Link>
       </div>
 

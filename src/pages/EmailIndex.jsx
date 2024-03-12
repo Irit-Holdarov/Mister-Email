@@ -8,6 +8,7 @@ import { AppEmailHeader } from "../cmps/AppEmailHeader"
 import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
 import { EmailCompose } from "./EmailCompose"
+import { eventBusService } from "../services/event-bus.service"
 
 export function EmailIndex() {
 
@@ -18,12 +19,7 @@ export function EmailIndex() {
 
   const params = useParams()
 
-  // useEffect(()=>{
-  //   // setSearchParams({compose:'yesssss'})
-  //   console.log(searchParams.get('compose'));
-  // })
-
-
+  
   useEffect(() => {
     // setSearchParams(filterBy)
     loadEmails()
@@ -74,7 +70,7 @@ export function EmailIndex() {
   }
 
   const isCompose = searchParams.get('compose')  || null
-  console.log('emails:', emails)
+
   if (!emails) return <div>Loading...</div>
   return (
     <div className="email-index">

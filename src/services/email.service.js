@@ -26,10 +26,15 @@ async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY);
 
     if (filterBy.txt) {
+        const lowerTxt = filterBy.txt.toLowerCase();
+    
         emails = emails.filter(email => {
-            return filterBy.txt.includes(email.subject.toLowerCase()) || filterBy.txt.includes(email.from.toLowerCase())
-                || filterBy.txt.includes(email.body.toLowerCase())
-        })
+            return (
+                email.subject.toLowerCase().includes(lowerTxt) ||
+                email.from.toLowerCase().includes(lowerTxt) ||
+                email.body.toLowerCase().includes(lowerTxt)
+            );
+        });
     }
 
     if (filterBy.isRead !== null) {
@@ -50,13 +55,13 @@ async function query(filterBy) {
                 emails = emails.filter(email => email.from === loggedinUser.email && !email.removedAt);
                 break;
             case 'starred':
-                emails = emails.filter(email => email.isStarred);
+                emails = emails.filter(email => email.isStarred && !email.removedAt);
                 break;
-            case 'drafts':
-                emails = emails.filter(email => !email.sentAt);
+            case 'draff':
+                emails = emails.filter(email => email.sentAt === null && !email.removedAt);
                 break;
             case 'trash':
-                emails = emails.filter(email => email.removedAt);
+                emails = emails.filter(email => email.removedAt );
                 break;
             default:
                 break;
@@ -118,7 +123,7 @@ function getDefualtEmail(subject = '', body = '', to = '') {
         body,
         isRead: true,
         isStarred: false,
-        sentAt: null, //null 
+        sentAt: null, 
         removedAt: null,
         from: loggedinUser.email,
         to,

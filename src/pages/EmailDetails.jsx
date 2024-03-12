@@ -11,10 +11,10 @@ export function EmailDetails() {
   const params = useParams()
 
   const navigate = useNavigate()
-
+  
   useEffect(() => {
     loadEmail()
-  }, )
+  }, [])
 
 
   async function loadEmail() {

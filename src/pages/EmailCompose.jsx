@@ -10,14 +10,26 @@ import { emailService } from "../services/email.service";
 export function EmailCompose({onAddEmail, onApdateEmail}) {
 
   const [email, setEmail] = useState(emailService.getDefualtEmail)
-  
+
+
   const navigate = useNavigate()
 
   const { folder, emailId } = useParams()
 
+  // useEffect(() => {
+  //   if (emailId) loadEmail()
+  // }, [])
+
   useEffect(() => {
-    if (emailId) loadEmail()
-  }, [])
+    if (emailId) {
+      // Reset the form to default values when emailId is present
+      setEmail(emailService.getDefualtEmail())
+    } else {
+      // Load the email when emailId is not present
+      loadEmail()
+    }
+  }, [emailId])
+
 
 
   async function loadEmail() {

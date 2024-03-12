@@ -22,7 +22,6 @@ _createEmails()
 
 
 async function query(filterBy) {
-    console.log(filterBy);
     let emails = await storageService.query(STORAGE_KEY);
 
     if (filterBy.txt) {
@@ -52,7 +51,7 @@ async function query(filterBy) {
                 emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt); 
                 break;
             case 'sent':
-                emails = emails.filter(email => email.from === loggedinUser.email && !email.removedAt);
+                emails = emails.filter(email => email.from === loggedinUser.email&& email.sentAt !== null  && !email.removedAt );
                 break;
             case 'starred':
                 emails = emails.filter(email => email.isStarred && !email.removedAt);

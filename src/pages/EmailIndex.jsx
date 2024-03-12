@@ -24,7 +24,7 @@ export function EmailIndex() {
     // setSearchParams(filterBy)
     loadEmails()
   }, [params, filterBy])
-
+  
 
   function onSetFilter(fieldsToUpdate) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))

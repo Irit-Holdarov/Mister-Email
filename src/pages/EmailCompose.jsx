@@ -16,19 +16,19 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
 
   const { folder, emailId } = useParams()
 
-  // useEffect(() => {
-  //   if (emailId) loadEmail()
-  // }, [])
-
   useEffect(() => {
-    if (emailId) {
-      // Reset the form to default values when emailId is present
-      setEmail(emailService.getDefualtEmail())
-    } else {
-      // Load the email when emailId is not present
-      loadEmail()
-    }
-  }, [emailId])
+    if (emailId) loadEmail()
+  }, [])
+
+  // useEffect(() => {
+  //   if (emailId) {
+  //     // Reset the form to default values when emailId is present
+  //     setEmail(emailService.getDefualtEmail())
+  //   } else {
+  //     // Load the email when emailId is not present
+  //     loadEmail()
+  //   }
+  // }, [emailId])
 
 
 

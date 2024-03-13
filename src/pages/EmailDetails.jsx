@@ -72,10 +72,10 @@ export function EmailDetails() {
         <img className="user-img" src={user} alt="user-img" />
 
         <div className="email-from-container">
-          <span className="email-details-from-name">{senderNameFrom(email.to)} </span>
+          <span className="email-details-from-name">{senderNameFrom(email)} </span>
           <span className="email-details-from">&lt;{email.from}&gt;</span>
 
-          <div className="email-details-to-name">{senderNameTo(email.to)}</div>
+          <div className="email-details-to-name">{senderNameTo(email)}</div>
         </div>
 
         <div className="email-details-sent-at">{timeForDate(email.sentAt)}</div>

@@ -4,8 +4,6 @@ import { EmailPreview } from "./EmailPreview";
 
 export function EmailList({ emails, onRemoveEmail, onApdateEmail }) {
 
-
-
   function onUpdateStar(email) {
     const newEmail = { ...email, isStarred: !email.isStarred }
     onApdateEmail(newEmail)

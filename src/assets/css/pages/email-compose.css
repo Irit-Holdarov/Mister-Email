@@ -1,9 +1,8 @@
 .email-compose {
   position: fixed;
-  /* padding: 20px; */
-  height: 100%;
+  height: 63%;
   right: 10px;
-  top: 40%;
+  top: 36%;
   left: 60%;
   background-color: white;
   display: flex;
@@ -62,9 +61,7 @@ textarea {
   width: 100%;
   border: none;
   outline: none;
-  /* font-family: Roboto,Arial,sans-serif;\ */
   height: 23px;
-
   font: small / 1.5 Arial, Helvetica, sans-serif;
   color: black;
 }
@@ -76,21 +73,19 @@ textarea {
   padding: 8px;
 }
 
-textarea#to{
+textarea#to {
   padding-left: 10px;
 }
 
-textarea#subject{
+textarea#subject {
   padding-left: 10px;
 }
 
-textarea#body{
-   height: 210px;
-   border-bottom: 1px solid lightgray;
-   padding: 10px
+textarea#body {
+  height: 210px;
+  border-bottom: 1px solid lightgray;
+  padding: 10px
 }
-
-
 
 
 .email-compose-send-btn {

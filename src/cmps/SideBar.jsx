@@ -3,7 +3,7 @@ import compose from "../assets/imgs/compose.png"
 import inbox from "../assets/imgs/inbox.png"
 import starred from "../assets/imgs/starred.png"
 import sent from "../assets/imgs/sent.png"
-import draff from "../assets/imgs/draff.png"
+import drafts from "../assets/imgs/drafts.png"
 import trash from "../assets/imgs/delete.png"
 import { Link, useParams, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -23,7 +23,7 @@ export function SideBar() {
     { to: "/email/inbox", imgSrc: inbox, altText: "inbox-img", name: "Inbox" },
     { to: "/email/starred", imgSrc: starred, altText: "star-img", name: "Starred"},
     { to: "/email/sent", imgSrc: sent, altText: "sent-img", name: "Sent" },
-    { to: "/email/draff", imgSrc: draff, altText: "draff-img", name: "Draff" },
+    { to: "/email/drafts", imgSrc: drafts, altText: "drafts-img", name: "Drafts" },
     { to: "/email/trash", imgSrc: trash, altText: "trash-img", name: "Trash" },
   ];
 

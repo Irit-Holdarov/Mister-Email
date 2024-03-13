@@ -25,6 +25,9 @@ export function EmailIndex() {
     loadEmails()
   }, [params, filterBy])
   
+  // console.log('searchParams',searchParams)
+  // console.log('params',params)
+  // console.log('filterBy',filterBy)
 
   function onSetFilter(fieldsToUpdate) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
@@ -69,6 +72,7 @@ export function EmailIndex() {
     }
   }
 
+  console.log('emails:', emails)
   const isCompose = searchParams.get('compose')  || null
 
   if (!emails) return <div>Loading...</div>

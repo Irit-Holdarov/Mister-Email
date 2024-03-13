@@ -20,17 +20,6 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
     if (emailId) loadEmail()
   }, [])
 
-  // useEffect(() => {
-  //   if (emailId) {
-  //     // Reset the form to default values when emailId is present
-  //     setEmail(emailService.getDefualtEmail())
-  //   } else {
-  //     // Load the email when emailId is not present
-  //     loadEmail()
-  //   }
-  // }, [emailId])
-
-
 
   async function loadEmail() {
     try {
@@ -52,7 +41,7 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
   async function onSaveEmail(ev) {
     ev.preventDefault()
     try {
-      const updateEmail = {...email, sentAt: Date.now()}
+      const updateEmail = {...email, sentAt: Date.now(), isDraft: false}
       if(email.id) await onApdateEmail(updateEmail)
       else await onAddEmail(updateEmail)
       navigate(`/email/${folder}`)
@@ -62,9 +51,10 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
   }
 
 
-  async function onSaveEmailToDraff() {
+  async function onSaveEmailToDrafts() {
     if (email.to.trim() !== "" || email.subject.trim() !== "" || email.body.trim() !== "") {
-      await onAddEmail(email);
+      // await onAddEmail({...email, to:"Draft"});
+      await onAddEmail({ ...email, isDraft: true });
     }
   }
 
@@ -74,7 +64,7 @@ export function EmailCompose({onAddEmail, onApdateEmail}) {
       <div className="email-compose-tool-bar">
         <div>New Message</div>
         <Link  to={`/email/${folder}`}>
-        <button className="close-btn" onClick={onSaveEmailToDraff}>X</button>
+        <button className="close-btn" onClick={onSaveEmailToDrafts}>X</button>
         </Link>
       </div>
 

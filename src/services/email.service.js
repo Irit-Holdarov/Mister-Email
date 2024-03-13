@@ -8,7 +8,7 @@ export const emailService = {
     getById,
     getDefualtEmail,
     getDefaultFilter,
-    getFilterFromParams
+    getFilterFromParams,
 }
 
 const STORAGE_KEY = 'emails'
@@ -56,8 +56,8 @@ async function query(filterBy) {
             case 'starred':
                 emails = emails.filter(email => email.isStarred && !email.removedAt);
                 break;
-            case 'draff':
-                emails = emails.filter(email => email.sentAt === null && !email.removedAt);
+            case 'drafts':
+                emails = emails.filter(email => email.sentAt === null && !email.removedAt );
                 break;
             case 'trash':
                 emails = emails.filter(email => email.removedAt );
@@ -109,7 +109,6 @@ function save(emailToSave) {
     if (emailToSave.id) {
         return storageService.put(STORAGE_KEY, emailToSave)
     } else {
-        emailToSave.isOn = false
         return storageService.post(STORAGE_KEY, emailToSave)
     }
 }

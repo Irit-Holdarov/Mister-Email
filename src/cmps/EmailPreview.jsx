@@ -18,9 +18,32 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
     return date.toLocaleDateString('en-GB', options);
   }
 
-  function senderName() {
+  function senderNameFrom() {
     return email.from.split('@')[0]
   }
+
+  function senderNameTo() {
+    return email.to.split('@')[0]
+  }
+
+
+  function determineSenderName() {
+    let senderName;
+  
+    if (params.folder === 'sent') {
+      senderName = `to: ${senderNameTo(email)}`;
+    } else if (params.folder === 'drafts') {
+      senderName = 'Draft';
+    } else if (params.folder === 'trash' && email.isDraft) {
+      senderName = 'Draft';
+    } else {
+      senderName = senderNameFrom(email);
+    }
+  
+    console.log('senderName:', senderName);
+    return senderName;
+  }
+
 
 
   return (
@@ -35,17 +58,17 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
 
       <Link to={`/email/${params.folder}/${email.id}`} className="email-link">
         <div className="email-link-grid">
-          <div className="email-preview-from-name">{senderName(email.from)}</div>
+          <div className={`${determineSenderName() === 'Draft' ? 'draft-style' : 'email-preview-name'}`}>
+            {determineSenderName()}
+          </div>
           <div className="email-preview-subject">{email.subject}</div>
           <div className="email-preview-body">{email.body}</div>
         </div>
       </Link>
-      
+
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>
-      
-      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email}/>
 
-
+      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email} />
     </article>
   )
 }

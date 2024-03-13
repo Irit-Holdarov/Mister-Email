@@ -45,6 +45,9 @@ a.email-link {
 .star-marker.star-marked {
   color: rgb(234, 234, 14);
 }
+.draft-style{
+  color: red;
+}
 
 /* subject */
 .email-preview-subject {

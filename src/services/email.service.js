@@ -67,7 +67,7 @@ async function query(filterBy) {
 
 function getDefaultFilter() {
     return {
-        status: 'inbox',
+        // status: 'inbox',
         txt: '',
         isRead: null,
         isStarred: null,
@@ -99,7 +99,6 @@ async function remove(id) {
     return email;
 }
 
-//לעדכן את התנאים 
 function save(emailToSave) {
     if (emailToSave.id) {
         return storageService.put(STORAGE_KEY, emailToSave)

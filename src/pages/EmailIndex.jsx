@@ -10,6 +10,7 @@ import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
 
 import { EmailCompose } from "./EmailCompose"
+import { EmailHamburger } from "../cmps/EmailHamburger"
 
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -21,20 +22,16 @@ export function EmailIndex() {
   useEffect(() => {
     // setSearchParams(filterBy)
     loadEmails()
-  }, [params, filterBy])
-  
-  // console.log('searchParams',searchParams)
-  // console.log('params',params)
-  // console.log('filterBy',filterBy)
+  }, [params.folder, filterBy])
 
   function onSetFilter(fieldsToUpdate) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
   }
 
   async function loadEmails() {
+    console.log(params.folder);
     try {
       const emails = await emailService.query({ ...filterBy, status: params.folder })
-      // const emails = await emailService.query(filterBy)
       setEmails(emails)
     } catch (err) {
       console.log('Error in loadEmails', err)
@@ -55,10 +52,10 @@ export function EmailIndex() {
 
   async function onApdateEmail(email) {
     try {
-      
+
       const updateEmail = await emailService.save(email)
       setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
-      if(params.folder === 'starred' && !email.isStarred){
+      if (params.folder === 'starred' && !email.isStarred) {
         setEmails((prevEmails) => {
           return prevEmails.filter(email => email.isStarred)
         })
@@ -71,18 +68,18 @@ export function EmailIndex() {
   async function onAddEmail(email) {
     try {
       const saveEmail = await emailService.save(email)
-      setEmails((prevEmails) =>[...prevEmails, saveEmail] )
+      setEmails((prevEmails) => [...prevEmails, saveEmail])
     } catch (err) {
       console.log("Error in onAddEmail", err)
     }
   }
 
-  console.log('emails:', emails)
-  const isCompose = searchParams.get('compose')  || null
+  const isCompose = searchParams.get('compose') || null
 
   if (!emails) return <div>Loading...</div>
   return (
     <div className="email-index">
+      <EmailHamburger/>
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <SideBar />
@@ -93,7 +90,7 @@ export function EmailIndex() {
           onRemoveEmail={onRemoveEmail}
           onApdateEmail={onApdateEmail}
         />}
-        {isCompose && <EmailCompose onAddEmail={onAddEmail} onApdateEmail={onApdateEmail}/>}
+      {isCompose && <EmailCompose onAddEmail={onAddEmail} onApdateEmail={onApdateEmail} />}
     </div>
   )
 }

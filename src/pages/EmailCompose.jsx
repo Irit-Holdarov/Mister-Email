@@ -12,7 +12,6 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
   const { folder, emailId } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
  
-
   const draftId = searchParams.get('compose')
 
   useEffect(() => {

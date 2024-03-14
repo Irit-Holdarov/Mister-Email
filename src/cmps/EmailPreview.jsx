@@ -40,7 +40,6 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
 
   const senderName = determineSenderName()
 
-
   function onPreviewLink() {
     let previewLink = `/email/${params.folder}`
     if (email.isDraft) {

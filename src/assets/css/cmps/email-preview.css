@@ -1,6 +1,6 @@
 .email-preview {
   font-weight: bold;
-  background-color: white;;
+  background-color: white;
   height: 40px;
   border: 1px solid transparent;
   padding: 0 13px;
@@ -31,7 +31,7 @@ a.email-link {
   background-color: #f2f6fc;
 }
 
-.email-actions-start{
+.email-actions-start {
   grid-auto-flow: column;
   place-items: center;
 }
@@ -69,8 +69,17 @@ a.email-link {
   padding-left: 27px;
 }
 
-.draft-style{
+.draft-style {
   color: red;
 }
 
+@media (max-width: 600px) {
+  .email-preview {
+    grid-template-columns: 1fr 70px;
+  }
 
+  .email-actions-start {
+    place-items: center;
+    display: none;
+  }
+}

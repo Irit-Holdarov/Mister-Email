@@ -1,5 +1,4 @@
 .email-index {
-
     height: 100%;
     background-color: #f6f8fc;
     display: grid;
@@ -9,12 +8,11 @@
     grid-template-rows: 78px 1fr
 }
 
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
     .email-index {
-        display: grid;
         grid-template-areas: "hamburger header"
-            "email-list email-list ";
+            "email-list email-list";
         grid-template-rows: auto 1fr;
         grid-template-columns: 50px 1fr;
     }
-} */
+}

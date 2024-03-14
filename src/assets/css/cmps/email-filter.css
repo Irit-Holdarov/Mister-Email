@@ -6,6 +6,13 @@
   position: relative;
 }
 
+
+@media (max-width: 600px){
+  .email-filter{
+    display: none;
+  }
+}
+
 .search-icon{
   width: 22px;
   height: 24px;

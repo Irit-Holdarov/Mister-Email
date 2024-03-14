@@ -15,4 +15,14 @@ ul.email-list {
   border-radius: 25px;
 }
 
-
+/* @media (max-width: 600px){
+  .email-list{
+    grid-area: email-list;
+  }
+  .email-filter{
+    display: none;
+  }
+  .side-bar{
+    display: none;
+  }
+} */

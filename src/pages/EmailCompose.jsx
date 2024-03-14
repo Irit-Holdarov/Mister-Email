@@ -1,4 +1,4 @@
-import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import deleteIcon from "../assets/imgs/delete_composs.png"
@@ -10,15 +10,19 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
   const [email, setEmail] = useState(emailService.getDefualtEmail)
   const navigate = useNavigate()
   const { folder, emailId } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
+ 
 
-  //התנאי לא טוב כי בכל מקרה יש איידי למייל. 
+  const draftId = searchParams.get('compose')
+
   useEffect(() => {
-    if (emailId) loadEmail()
+    if (draftId) 
+    loadEmail()
   }, [])
 
   async function loadEmail() {
     try {
-      const email = await emailService.getById(emailId)
+      const email = await emailService.getById(draftId)
       setEmail(email)
     } catch (err) {
       console.log("Had issues loading email", err)
@@ -30,6 +34,10 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
     setEmail(prevEmail => ({ ...prevEmail, [field]: value }))
   }
 
+  let linkUrl = '/email'
+  if (folder) linkUrl += `/${folder}`
+  if (emailId) linkUrl += `/${emailId}`
+
   async function onSaveEmail(ev) {
     ev.preventDefault()
     try {
@@ -37,21 +45,24 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
       if (email.id) await onApdateEmail(updateEmail)
       else await onAddEmail(updateEmail)
       showSuccessMsg('Email sent.')
-      navigate(`/email/${folder}`)
+      navigate(linkUrl)
     } catch (err) {
       console.log("Had issues saving email", err)
       showErrorMsg('Email not send.')
     }
   }
-  
+
   async function onSaveEmailToDrafts() {
     try {
+      const updateEmail = { ...email, isDraft: true }
       if (email.to.trim() !== "" || email.subject.trim() !== "" || email.body.trim() !== "") {
-        await onAddEmail({ ...email, isDraft: true });
+        if(email.id) await onApdateEmail(updateEmail)
+        else await onAddEmail(updateEmail)
         showSuccessMsg('Email moved to drafts.')
       }
+      navigate(linkUrl)
     } catch (error) {
-      console.error("Error saving email to drafts:", error);
+      console.error("Error saving email to drafts:", error)
       showErrorMsg('Email could not moved to drafts.')
     }
   }
@@ -60,9 +71,7 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
     <section className="email-compose">
       <div className="email-compose-tool-bar">
         <div>New Message</div>
-        <Link to={`/email/${folder}`}>
-          <button className="close-btn" onClick={onSaveEmailToDrafts}>X</button>
-        </Link>
+        <button className="close-btn" onClick={onSaveEmailToDrafts}>X</button>
       </div>
 
       <form onSubmit={onSaveEmail}>

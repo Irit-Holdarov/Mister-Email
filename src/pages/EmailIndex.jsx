@@ -55,8 +55,14 @@ export function EmailIndex() {
 
   async function onApdateEmail(email) {
     try {
+      
       const updateEmail = await emailService.save(email)
       setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
+      if(params.folder === 'starred' && !email.isStarred){
+        setEmails((prevEmails) => {
+          return prevEmails.filter(email => email.isStarred)
+        })
+      }
     } catch (err) {
       console.log("Error in onApdateEmail", err)
     }

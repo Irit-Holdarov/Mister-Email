@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import { GoStarFill } from "react-icons/go";
@@ -8,6 +8,7 @@ import { EmailActions } from "./EmailActions";
 
 export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail }) {
   const params = useParams()
+  const navigate = useNavigate()
 
   function formattedDate(sentAt) {
     const date = new Date(sentAt);
@@ -34,8 +35,20 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
     } else {
       senderName = senderNameFrom(email);
     }
-    // console.log('senderName:', senderName);
     return senderName;
+  }
+
+  const senderName = determineSenderName()
+
+
+  function onPreviewLink() {
+    let previewLink = `/email/${params.folder}`
+    if (email.isDraft) {
+      previewLink += `/?compose=${email.id}`
+    } else {
+      previewLink += `/${email.id}`
+    }
+    navigate(previewLink)
   }
 
   return (
@@ -46,15 +59,15 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
           onClick={() => { onUpdateStar(email) }} />
       </div>
 
-      <Link to={`/email/${params.folder}/${email.id}`} className="email-link">
+      <div className="email-link" onClick={onPreviewLink}>
         <div className="email-link-grid">
-          <div className={`${determineSenderName() === 'Draft' ? 'draft-style' : 'email-preview-name'}`}>
-            {determineSenderName()}
+          <div className={`${senderName === 'Draft' ? 'draft-style' : 'email-preview-name'}`}>
+            {senderName}
           </div>
           <div className="email-preview-subject">{email.subject}</div>
           <div className="email-preview-body">{email.body}</div>
         </div>
-      </Link>
+      </div>
 
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>
 

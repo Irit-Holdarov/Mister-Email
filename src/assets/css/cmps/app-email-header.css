@@ -28,3 +28,27 @@
 .app-header section.container>section {
     flex-grow: 1;
 }
+
+.hamburger-button:hover {
+    background-color: rgba(60, 64, 67, .1)
+}
+
+.hamburger-button{
+    display: none;
+    font-size: 20px;
+    color: #5f6368;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+/* @media (max-width: 600px){
+    .app-header.hamburger-button{
+        grid-area: hamburger;
+    }
+
+    .app-header.email_logo{
+        grid-area: header;
+    }
+} */

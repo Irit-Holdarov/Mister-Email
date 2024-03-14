@@ -29,7 +29,6 @@ a.email-link {
 .read.email-preview {
   font-weight: normal;
   background-color: #f2f6fc;
-
 }
 
 .email-actions-start{
@@ -44,9 +43,6 @@ a.email-link {
 
 .star-marker.star-marked {
   color: rgb(234, 234, 14);
-}
-.draft-style{
-  color: red;
 }
 
 /* subject */
@@ -66,12 +62,15 @@ a.email-link {
   font-weight: normal;
 }
 
-
 /* Sent At */
 .email-preview-sent-at {
   color: grey;
   font-size: 85%;
   padding-left: 27px;
+}
+
+.draft-style{
+  color: red;
 }
 
 

@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
-
 import { useParams } from "react-router-dom";
+
 import { GoStarFill } from "react-icons/go";
 
 import { CheckBox } from "./CheckBox";
 import { EmailActions } from "./EmailActions";
 
-
-
 export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail }) {
-
   const params = useParams()
 
   function formattedDate(sentAt) {
@@ -26,10 +23,8 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
     return email.to.split('@')[0]
   }
 
-
   function determineSenderName() {
     let senderName;
-  
     if (params.folder === 'sent') {
       senderName = `to: ${senderNameTo(email)}`;
     } else if (params.folder === 'drafts') {
@@ -39,19 +34,14 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
     } else {
       senderName = senderNameFrom(email);
     }
-  
-    console.log('senderName:', senderName);
+    // console.log('senderName:', senderName);
     return senderName;
   }
-
-
 
   return (
     <article className={`email-preview grid ${email.isRead ? 'read' : ''}`}>
       <div className="email-actions-start grid">
-
         <CheckBox email={email} />
-
         <GoStarFill className={`star-marker ${email.isStarred ? 'star-marked' : ''}`}
           onClick={() => { onUpdateStar(email) }} />
       </div>

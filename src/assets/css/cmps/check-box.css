@@ -21,8 +21,6 @@
   border-radius: 5px;
 }
 
-/* #c2dbff */
-
 .check-box:hover .checkbox-text {
   display: block;
 }

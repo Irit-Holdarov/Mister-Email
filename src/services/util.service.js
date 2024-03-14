@@ -1,10 +1,7 @@
-
 export const utilService = {
     saveToStorage,
     loadFromStorage
 }
-
-
 
 function saveToStorage(key, value) {
     localStorage[key] = JSON.stringify(value);

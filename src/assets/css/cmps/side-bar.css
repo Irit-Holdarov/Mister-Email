@@ -35,7 +35,6 @@
   transition: margin .15s cubic-bezier(0.4, 0, 0.2, 1), padding .15s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0 16px 16px 0;
   font-weight: 400;
-
 }
 
 .item-content:hover {
@@ -49,7 +48,6 @@
   font-weight: 700;
   text-decoration: none;
 }
-
 
 .icon-item {
   width: 20px;

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+
 import { IoMdArrowBack } from "react-icons/io";
+
 import user from "../assets/imgs/user.png"
+
 import { emailService } from "../services/email.service"
 import { EmailActions } from "../cmps/EmailActions";
-
 
 export function EmailDetails() {
   const [email, setEmail] = useState(null)
   const params = useParams()
-
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     loadEmail()
   }, [])
-
 
   async function loadEmail() {
     try {
@@ -37,8 +37,6 @@ export function EmailDetails() {
     return email.from.split('@')[0];
   }
 
-
-
   function timeForDate(timeStamp) {
     const date = new Date(timeStamp)
     const formattedDate = date.toLocaleString('en-US', {
@@ -56,16 +54,14 @@ export function EmailDetails() {
   if (!email) return <div>Loading...</div>
   return (
     <section className="email-details">
-
       <div className="email-details-tool-bar">
         <Link to={`/email/${params.folder}`} title="Go Back" className="go-back">
           <IoMdArrowBack />
         </Link>
-
         {/* add here but the display is none  */}
         {/* <EmailActions className="email-details-email-actions"/> */}
       </div>
-      
+
       <div className="email-details-subject">{email.subject}</div>
 
       <div className="head-email">
@@ -82,7 +78,6 @@ export function EmailDetails() {
       </div>
 
       <div className="email-details-body">{email.body}</div>
-
     </section>
   )
 }

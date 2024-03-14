@@ -1,4 +1,3 @@
-
 import { useState } from "react"
 
 export function CheckBox() { // I can use the email prop here as needed
@@ -17,6 +16,5 @@ export function CheckBox() { // I can use the email prop here as needed
       />
       <span className="checkbox-text">Select</span>
     </div>
-
   )
 }

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 
-
 export function AppEmailHeader() {
   return (
     <header className="app-header">

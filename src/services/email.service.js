@@ -20,20 +20,17 @@ var loggedinUser = {
 
 _createEmails()
 
-
 async function query(filterBy) {
-    let emails = await storageService.query(STORAGE_KEY);
-
+    let emails = await storageService.query(STORAGE_KEY)
     if (filterBy.txt) {
-        const lowerTxt = filterBy.txt.toLowerCase();
-    
+        const lowerTxt = filterBy.txt.toLowerCase()
         emails = emails.filter(email => {
             return (
                 email.subject.toLowerCase().includes(lowerTxt) ||
                 email.from.toLowerCase().includes(lowerTxt) ||
                 email.body.toLowerCase().includes(lowerTxt)
-            );
-        });
+            )
+        })
     }
 
     if (filterBy.isRead !== null) {
@@ -44,32 +41,29 @@ async function query(filterBy) {
         emails = emails.filter(email => email.isStarred === filterBy.isStarred)
     }
 
-
     if (filterBy.status) {
         switch (filterBy.status) {
             case 'inbox':
-                emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt); 
-                break;
+                emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt);
+                break
             case 'sent':
-                emails = emails.filter(email => email.from === loggedinUser.email&& email.sentAt !== null  && !email.removedAt );
-                break;
+                emails = emails.filter(email => email.from === loggedinUser.email && email.sentAt !== null && !email.removedAt);
+                break
             case 'starred':
                 emails = emails.filter(email => email.isStarred && !email.removedAt);
-                break;
+                break
             case 'drafts':
-                emails = emails.filter(email => email.sentAt === null && !email.removedAt );
-                break;
+                emails = emails.filter(email => email.sentAt === null && !email.removedAt);
+                break
             case 'trash':
-                emails = emails.filter(email => email.removedAt );
-                break;
+                emails = emails.filter(email => email.removedAt);
+                break
             default:
-                break;
+                break
         }
     }
-
     return emails
 }
-
 
 function getDefaultFilter() {
     return {
@@ -88,23 +82,24 @@ function getFilterFromParams(searchParams) {
     return filterBy
 }
 
-
 function getById(id) {
     return storageService.get(STORAGE_KEY, id)
 }
-
 
 async function remove(id) {
     const email = await storageService.get(STORAGE_KEY, id);
     if (email.removedAt) {
         await storageService.remove(STORAGE_KEY, id);
+        showSuccessMsg('Email deleted.')
     } else {
         email.removedAt = Date.now();
         await storageService.put(STORAGE_KEY, email);
+        showSuccessMsg('Email moved to trash.')
     }
     return email;
 }
 
+//לעדכן את התנאים 
 function save(emailToSave) {
     if (emailToSave.id) {
         return storageService.put(STORAGE_KEY, emailToSave)
@@ -113,22 +108,18 @@ function save(emailToSave) {
     }
 }
 
-
 function getDefualtEmail(subject = '', body = '', to = '') {
     return {
-
         subject,
         body,
         isRead: true,
         isStarred: false,
-        sentAt: null, 
+        sentAt: null,
         removedAt: null,
         from: loggedinUser.email,
         to,
     };
 }
-
-
 
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
@@ -231,7 +222,8 @@ function _createEmails() {
                 removedAt: null,
                 from: 'irit.holdarov@gmail.com',
                 to: 'angel@angel.com',
-            }, {
+            },
+            {
                 id: 'e109',
                 subject: 'Miss you!',
                 body: 'Would love to catch up sometimes',
@@ -242,13 +234,19 @@ function _createEmails() {
                 from: 'irit.holdarov@gmail.com',
                 to: 'momo@momo.com',
             },
-
-
+            {
+                id: 'e110',
+                subject: 'draft',
+                body: 'draft',
+                isRead: true,
+                isStarred: false,
+                sentAt: null,
+                removedAt: null,
+                isDraft: true,
+                from: 'irit.holdarov@gmail.com',
+                to: 'shosh@gmail.com',
+            },
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
 }
-
-
-
-

@@ -1,5 +1,4 @@
 
-
 export function AboutAs() {
   return (
     <div className="about-as">

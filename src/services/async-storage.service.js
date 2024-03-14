@@ -19,7 +19,7 @@ async function get(entityType, entityId) {
 }
 
 async function post(entityType, newEntity) {
-    newEntity = { ...newEntity}
+    newEntity = { ...newEntity }
     newEntity.id = _makeId()
     const entities = await query(entityType)
     entities.push(newEntity)
@@ -45,20 +45,9 @@ async function remove(entityType, entityId) {
 }
 
 // Private functions
-
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
-
-
-
-// let nextId = 115;
-
-// function _makeId() {
-//     const currentId = nextId++;
-//     return 'e' + currentId;
-// }
-
 
 function _makeId() {
     const nextId = parseInt(localStorage.getItem('nextId')) || 1;

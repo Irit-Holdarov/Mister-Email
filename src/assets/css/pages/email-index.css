@@ -5,8 +5,6 @@
     display: grid;
     grid-template-areas: "header filter"
                          "sidebar email-list";
-
-        
     grid-template-columns: 237Px 1fr;
     grid-template-rows: 78px 1fr
 }

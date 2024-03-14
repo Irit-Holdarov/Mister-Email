@@ -1,6 +1,5 @@
 .app-header {
     background: #f6f8fc;
-    ;
     color: black;
     grid-area: header;
 }
@@ -12,6 +11,7 @@
 .app-header section.container img{
     padding-top: 15px;
 }
+
 .app-header h1.logo {
     flex-grow: 1;
     font-weight: 600;

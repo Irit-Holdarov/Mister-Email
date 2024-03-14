@@ -1,5 +1,5 @@
 
-.user-msg.success {
+.user-msg {
   position: fixed;
   bottom: 0;
   height: 35px;
@@ -17,21 +17,13 @@
   align-items: center;
 }
 
-/* .user-msg.success{
+.user-msg.success{
   background-color: rgb(32, 33, 36);
-} */
-
-/* 
-.user-msg.progress {
-  font-style: italic;
-  background-color: rgb(124, 126, 130);
-} */
-
-
-.user-msg.error {
-  background-color: rgb(182, 18, 18);
 }
 
+.user-msg.error {
+  background-color: red;
+}
 
 .user-msg-close-button {
   all: unset;

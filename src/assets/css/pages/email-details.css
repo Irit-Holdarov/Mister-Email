@@ -42,7 +42,6 @@
   grid-area: img;
 }
 
-
 .email-from-container {
   grid-area: email-info;
   padding-top: 10px;
@@ -77,7 +76,6 @@
   grid-area: sent-at;
   padding-top: 10px;
 }
-
 
 .email-details-body {
   font-family: sans-serif;

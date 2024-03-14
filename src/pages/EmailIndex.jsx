@@ -2,24 +2,22 @@ import { useEffect, useState } from "react"
 import { Outlet, useParams, useSearchParams } from "react-router-dom"
 
 import { emailService } from "../services/email.service"
+import { showErrorMsg } from "../services/event-bus.service"
 
 import { EmailList } from "../cmps/EmailList"
 import { AppEmailHeader } from "../cmps/AppEmailHeader"
 import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
+
 import { EmailCompose } from "./EmailCompose"
-import { eventBusService } from "../services/event-bus.service"
 
 export function EmailIndex() {
-
   const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
   // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
-
   const params = useParams()
 
-  
   useEffect(() => {
     // setSearchParams(filterBy)
     loadEmails()
@@ -43,7 +41,6 @@ export function EmailIndex() {
     }
   }
 
-
   async function onRemoveEmail(emailId) {
     try {
       await emailService.remove(emailId)
@@ -52,6 +49,7 @@ export function EmailIndex() {
       })
     } catch (err) {
       console.log("Error in onRemoveEmail", err)
+      showErrorMsg('Could not delete email.')
     }
   }
 
@@ -63,6 +61,7 @@ export function EmailIndex() {
       console.log("Error in onApdateEmail", err)
     }
   }
+
   async function onAddEmail(email) {
     try {
       const saveEmail = await emailService.save(email)
@@ -81,7 +80,6 @@ export function EmailIndex() {
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <SideBar />
-
       {params.emailId && <Outlet />}
       {!params.emailId &&
         <EmailList
@@ -89,9 +87,7 @@ export function EmailIndex() {
           onRemoveEmail={onRemoveEmail}
           onApdateEmail={onApdateEmail}
         />}
-
         {isCompose && <EmailCompose onAddEmail={onAddEmail} onApdateEmail={onApdateEmail}/>}
-
     </div>
   )
 }

@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
-import { IoSearch } from "react-icons/io5";
 import { useParams } from "react-router-dom";
+
+import { IoSearch } from "react-icons/io5";
 
 export function EmailFilter({ filterBy, onSetFilter }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-
   const params = useParams()
 
-
-  useEffect(()=>{
-    onSetFilter(filterByToEdit)    
-  },[filterByToEdit, params])
-  
-  
+  useEffect(() => {
+    onSetFilter(filterByToEdit)
+  }, [filterByToEdit, params])
 
   function handleChange(ev) {
     let { value, name: field } = ev.target // ev.target.value  ev.target.name
-
-    const parsingnames =['isStarred', 'isRead' ]
-    if(parsingnames.includes(field)){
+    const parsingnames = ['isStarred', 'isRead']
+    if (parsingnames.includes(field)) {
       value = JSON.parse(value)
     }
-
     setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
   }
 
-
   return (
     <form className="email-filter">
+
       <label htmlFor="search"></label>
       <IoSearch className="search-icon" />
       <input
@@ -38,14 +33,12 @@ export function EmailFilter({ filterBy, onSetFilter }) {
         value={filterByToEdit.txt}
         onChange={handleChange} />
 
-
       <label >
         <select className="isRead-select"
-
           name="isRead"
           value={'' + filterByToEdit.isRead}
           onChange={handleChange}>
-            
+
           <option value={'null'}>All</option>
           <option value={'true'}>Read</option>
           <option value={'false'}>Not Read</option>
@@ -54,17 +47,16 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 
       <label >
         <select className="isStarred-select"
-
           name="isStarred"
           value={'' + filterByToEdit.isStarred}
           onChange={handleChange}>
-            
+
           <option value={'null'}>All</option>
           <option value={'true'}>Starred</option>
           <option value={'false'}>Not starred</option>
         </select>
       </label>
-
+      
     </form>
   )
 }

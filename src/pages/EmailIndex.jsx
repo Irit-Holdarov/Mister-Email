@@ -10,7 +10,6 @@ import { SideBar } from "../cmps/SideBar"
 import { EmailFilter } from "../cmps/EmailFilter"
 
 import { EmailCompose } from "./EmailCompose"
-import { EmailHamburger } from "../cmps/EmailHamburger"
 
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -79,7 +78,6 @@ export function EmailIndex() {
   if (!emails) return <div>Loading...</div>
   return (
     <div className="email-index">
-      <EmailHamburger/>
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <SideBar />

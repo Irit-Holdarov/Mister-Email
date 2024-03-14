@@ -10,9 +10,9 @@
 
 @media (max-width: 600px) {
     .email-index {
-        grid-template-areas: "hamburger header"
+        grid-template-areas: "header hamburg"
             "email-list email-list";
         grid-template-rows: auto 1fr;
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 1fr;
     }
 }

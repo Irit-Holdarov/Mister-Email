@@ -35,6 +35,7 @@
   transition: margin .15s cubic-bezier(0.4, 0, 0.2, 1), padding .15s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0 16px 16px 0;
   font-weight: 400;
+  justify-content: space-between;
 }
 
 .item-content:hover {
@@ -42,7 +43,7 @@
   background-color: rgba(32, 33, 36, 0.059);
 }
 
-.item-content.active{
+.item-content.active {
   background-color: #d2e3fc;
   color: #001d35;
   font-weight: 700;
@@ -53,4 +54,22 @@
   width: 20px;
   height: 20px;
   margin-right: 16px;
+}
+
+/* span.count-folder{
+  padding-left: 90px;
+} */
+
+
+@media (max-width: 600px) {
+  .side-bar{
+    display: none;
+  }
+  /* .section.side-bar{
+    position: absolute;
+    top: 127px;
+    left: 0;
+    transition: left 0.5s ease;
+  } */
+
 }

@@ -80,7 +80,7 @@ export function EmailIndex() {
     <div className="email-index">
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-      <SideBar />
+      <SideBar/>
       {params.emailId && <Outlet />}
       {!params.emailId &&
         <EmailList

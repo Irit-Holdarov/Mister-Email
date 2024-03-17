@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { SideBar } from './SideBar'
 
 
 export function AppEmailHeader() {
@@ -12,7 +13,7 @@ export function AppEmailHeader() {
   return (
     <header className="app-header">
       <section className="container">
-        
+
         <div className="email-hamburger">
           <button className="hamburger-button" onClick={toggleNav}>
             {isMenuOpen ? 'X' : '☰'}
@@ -23,6 +24,9 @@ export function AppEmailHeader() {
           <img className="email_logo" src="/src/assets/imgs/logo_gmail.png" alt="Gmail"></img>
         </Link>
       </section>
+
+      {/* {isMenuOpen ? <SideBar className="show" /> : <SideBar />} */}
+      {isMenuOpen && <SideBar/>}
     </header>
   )
 }

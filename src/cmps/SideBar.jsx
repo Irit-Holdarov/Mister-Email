@@ -53,14 +53,19 @@ export function SideBarItem({ to, imgSrc, altText, name, isActive }) {
   return (
     <Link className={`item-content item-content-${name.toLowerCase()} ${isActive ? 'active' : ''}`}
       to={to}>
-        
-      <span className="icon-item">
-        <img src={imgSrc} alt={altText} />
-      </span>
 
-      <span className="name-item">
-        {name}
-      </span>
+      <div className="item-folder">
+        <span className="icon-item">
+          <img src={imgSrc} alt={altText} />
+        </span>
+
+        <span className="name-item">
+          {name}
+        </span>
+      </div>
+      {/* <span className="count-folder">
+        8
+      </span> */}
     </Link>
   );
 }

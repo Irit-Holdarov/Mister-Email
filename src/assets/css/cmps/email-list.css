@@ -23,8 +23,5 @@ ul.email-list {
     margin: 0;
     overflow-y: auto;
     max-height: 530px;
-  }
-  .side-bar{
-    display: none;
-  }
+  } 
 }

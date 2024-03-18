@@ -55,11 +55,18 @@
   height: 20px;
   margin-right: 16px;
 }
+.item-folder{
+  display: flex;
+  align-items: center;
+}
 
-/* span.count-folder{
-  padding-left: 90px;
-} */
+.count-folder{
+  font-size: 13px;
+}
 
+.bold{
+  font-weight: bold;
+}
 
 @media (max-width: 600px) {
   .side-bar{

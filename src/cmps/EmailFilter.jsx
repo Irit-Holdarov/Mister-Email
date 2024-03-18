@@ -5,10 +5,11 @@ import { IoSearch } from "react-icons/io5";
 
 export function EmailFilter({ filterBy, onSetFilter }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+  const params = useParams()
 
   useEffect(() => {
     onSetFilter(filterByToEdit)
-}, [filterByToEdit])
+}, [filterByToEdit, params])
 
   function handleChange(ev) {
     let { value, name: field } = ev.target // ev.target.value  ev.target.name

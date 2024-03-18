@@ -14,6 +14,7 @@ import { EmailCompose } from "./EmailCompose"
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
+  const [unreadCount, setUnreadCount] = useState(0)
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
   // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
   const params = useParams()
@@ -28,10 +29,13 @@ export function EmailIndex() {
   }
 
   async function loadEmails() {
-    console.log(params.folder);
     try {
       const emails = await emailService.query({ ...filterBy, status: params.folder })
       setEmails(emails)
+      if (params.folder === 'inbox') {
+        const unread = emails.filter(email => !email.isRead).length
+        setUnreadCount(unread)
+      }
     } catch (err) {
       console.log('Error in loadEmails', err)
     }
@@ -51,7 +55,6 @@ export function EmailIndex() {
 
   async function onApdateEmail(email) {
     try {
-
       const updateEmail = await emailService.save(email)
       setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
       if (params.folder === 'starred' && !email.isStarred) {
@@ -59,6 +62,8 @@ export function EmailIndex() {
           return prevEmails.filter(email => email.isStarred)
         })
       }
+      const updatedUnreadCount = updateEmail.isRead ? unreadCount - 1 : unreadCount + 1
+      setUnreadCount(updatedUnreadCount)
     } catch (err) {
       console.log("Error in onApdateEmail", err)
     }
@@ -80,7 +85,7 @@ export function EmailIndex() {
     <div className="email-index">
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-      <SideBar/>
+      <SideBar unreadCount={unreadCount} />
       {params.emailId && <Outlet />}
       {!params.emailId &&
         <EmailList

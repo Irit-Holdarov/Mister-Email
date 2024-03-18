@@ -8,7 +8,7 @@ import sent from "../assets/imgs/sent.png"
 import drafts from "../assets/imgs/drafts.png"
 import trash from "../assets/imgs/delete.png"
 
-export function SideBar() {
+export function SideBar({unreadCount}) {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = useParams()
   const [focusedItem, setFocusedItem] = useState('inbox')
@@ -42,14 +42,16 @@ export function SideBar() {
 
       <div className="side-bar-items">
         {sidebarItems.map((item, index) => (
-          <SideBarItem key={index} {...item} isActive={focusedItem === item.name.toLocaleLowerCase()} />
+          <SideBarItem key={index} {...item} isActive={focusedItem === item.name.toLocaleLowerCase()} unreadCount={unreadCount}/>
         ))}
       </div>
     </section>
   )
 }
 
-export function SideBarItem({ to, imgSrc, altText, name, isActive }) {
+export function SideBarItem({ to, imgSrc, altText, name, isActive , unreadCount}) {
+  const isUnread = unreadCount > 0
+
   return (
     <Link className={`item-content item-content-${name.toLowerCase()} ${isActive ? 'active' : ''}`}
       to={to}>
@@ -59,13 +61,16 @@ export function SideBarItem({ to, imgSrc, altText, name, isActive }) {
           <img src={imgSrc} alt={altText} />
         </span>
 
-        <span className="name-item">
+        <span className={`name-item ${isUnread && name.toLowerCase() === 'inbox' ? 'bold' : ''}`}>
           {name}
         </span>
       </div>
-      {/* <span className="count-folder">
-        8
-      </span> */}
+      {isUnread && name.toLowerCase() === 'inbox' && (
+         <span className="count-folder">
+          {unreadCount}
+        </span>
+      )}
+
     </Link>
-  );
+  )
 }

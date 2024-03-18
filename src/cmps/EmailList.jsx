@@ -1,10 +1,10 @@
 import { EmailPreview } from "./EmailPreview";
 
-export function EmailList({ emails, onRemoveEmail, onApdateEmail }) {
+export function EmailList({ emails, onRemoveEmail, onUpdateEmail }) {
 
   function onUpdateStar(email) {
     const newEmail = { ...email, isStarred: !email.isStarred }
-    onApdateEmail(newEmail)
+    onUpdateEmail(newEmail, false)
 
     if (newEmail.isStarred) {
       showSuccessMsg("Email starred.");
@@ -22,7 +22,7 @@ export function EmailList({ emails, onRemoveEmail, onApdateEmail }) {
               email={email}
               onUpdateStar={onUpdateStar}
               onRemoveEmail={onRemoveEmail}
-              onApdateEmail={onApdateEmail}
+              onUpdateEmail={onUpdateEmail}
             />
           </li>)
       }

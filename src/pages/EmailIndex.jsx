@@ -11,6 +11,7 @@ import { EmailFilter } from "../cmps/EmailFilter"
 
 import { EmailCompose } from "./EmailCompose"
 
+
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
@@ -23,6 +24,10 @@ export function EmailIndex() {
   useEffect(() => {
     // setSearchParams(filterBy)
     loadEmails()
+
+    return () => {
+      setEmails([])
+    }
   }, [params.folder, filterBy])
 
   function onSetFilter(fieldsToUpdate) {
@@ -48,12 +53,15 @@ export function EmailIndex() {
 
   async function onRemoveEmail(emailId) {
     try {
-     const removedEmail = await emailService.remove(emailId)
+      const removedEmail = await emailService.remove(emailId)
       setEmails((prevEmails) => {
         return prevEmails.filter(email => email.id != emailId)
       })
       if (removedEmail.isDraft) {
         setDraftsCount(prevDraftsCount => prevDraftsCount - 1);
+      }
+      if (removedEmail.removedAt && !removedEmail.isRead) {
+        setUnreadCount(prevUnreadCount => prevUnreadCount - 1);
       }
     } catch (err) {
       console.log("Error in onRemoveEmail", err)
@@ -61,7 +69,7 @@ export function EmailIndex() {
     }
   }
 
-  async function onApdateEmail(email) {
+  async function onUpdateEmail(email, isReadToggle = true) {
     try {
       const updateEmail = await emailService.save(email)
       setEmails((prevEmails) => prevEmails.map(currEmail => currEmail.id === email.id ? updateEmail : currEmail))
@@ -70,10 +78,13 @@ export function EmailIndex() {
           return prevEmails.filter(email => email.isStarred)
         })
       }
-      const updatedUnreadCount = updateEmail.isRead ? unreadCount - 1 : unreadCount + 1
-      setUnreadCount(updatedUnreadCount)
+      if (isReadToggle) {
+        const updatedUnreadCount = updateEmail.isRead ? unreadCount - 1 : unreadCount + 1
+        setUnreadCount(updatedUnreadCount)
+      }
+
     } catch (err) {
-      console.log("Error in onApdateEmail", err)
+      console.log("Error in onUpdateEmail", err)
     }
   }
 
@@ -103,9 +114,9 @@ export function EmailIndex() {
         <EmailList
           emails={emails}
           onRemoveEmail={onRemoveEmail}
-          onApdateEmail={onApdateEmail}
+          onUpdateEmail={onUpdateEmail}
         />}
-      {isCompose && <EmailCompose onAddEmail={onAddEmail} onApdateEmail={onApdateEmail} />}
+      {isCompose && <EmailCompose onAddEmail={onAddEmail} onUpdateEmail={onUpdateEmail} />}
     </div>
   )
 }

@@ -44,19 +44,19 @@ async function query(filterBy) {
     if (filterBy.status) {
         switch (filterBy.status) {
             case 'inbox':
-                emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt);
+                emails = emails.filter(email => email.to === loggedinUser.email && !email.removedAt)
                 break
             case 'sent':
-                emails = emails.filter(email => email.from === loggedinUser.email && email.sentAt !== null && !email.removedAt);
+                emails = emails.filter(email => email.from === loggedinUser.email && email.sentAt !== null && !email.removedAt)
                 break
             case 'starred':
-                emails = emails.filter(email => email.isStarred && !email.removedAt);
+                emails = emails.filter(email => email.isStarred && !email.removedAt)
                 break
             case 'drafts':
-                emails = emails.filter(email => email.sentAt === null && !email.removedAt);
+                emails = emails.filter(email => email.sentAt === null && !email.removedAt)
                 break
             case 'trash':
-                emails = emails.filter(email => email.removedAt);
+                emails = emails.filter(email => email.removedAt)
                 break
             default:
                 break

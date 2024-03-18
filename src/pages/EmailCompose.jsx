@@ -1,12 +1,12 @@
-import { Link, useLocation, useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 import deleteIcon from "../assets/imgs/delete_composs.png"
 
-import { emailService } from "../services/email.service";
-import { showErrorMsg } from "../services/event-bus.service";
+import { emailService } from "../services/email.service"
+import { showErrorMsg } from "../services/event-bus.service"
 
-export function EmailCompose({ onAddEmail, onApdateEmail }) {
+export function EmailCompose({ onAddEmail, onUpdateEmail }) {
   const [email, setEmail] = useState(emailService.getDefualtEmail)
   const navigate = useNavigate()
   const { folder, emailId } = useParams()
@@ -15,14 +15,16 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
   const draftId = searchParams.get('compose')
 
   useEffect(() => {
-    if (draftId)
+    if (draftId !== 'new')
       loadEmail()
   }, [])
 
 
   async function loadEmail() {
     try {
+      console.log('draftId:', draftId)
       const email = await emailService.getById(draftId)
+
       setEmail(email)
     } catch (err) {
       console.log("Had issues loading email", err)
@@ -41,8 +43,11 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
   async function onSaveEmail(ev) {
     ev.preventDefault()
     try {
-      const updateEmail = { ...email, sentAt: Date.now(), isDraft: false }
-      if (email.id) await onApdateEmail(updateEmail)
+      let updateEmail = { ...email, sentAt: Date.now(), isDraft: false }
+      if (email.isDraft && email.removedAt !== null) {
+        updateEmail = { ...updateEmail, removedAt: null };
+      }
+      if (email.id) await onUpdateEmail(updateEmail)
       else await onAddEmail(updateEmail)
       showSuccessMsg('Email sent.')
       navigate(linkUrl)
@@ -56,11 +61,11 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
     try {
       const updateEmail = { ...email, isDraft: true }
       if (email.to.trim() !== "" || email.subject.trim() !== "" || email.body.trim() !== "") {
-        if (email.id) await onApdateEmail(updateEmail)
+        if (email.id) await onUpdateEmail(updateEmail)
         else await onAddEmail(updateEmail)
         showSuccessMsg('Email moved to drafts.')
       }
-      
+
 
       navigate(linkUrl)
     } catch (error) {

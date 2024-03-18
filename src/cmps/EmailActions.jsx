@@ -4,16 +4,16 @@ import deleteEmil from "../assets/imgs/delete.png"
 
 import { showSuccessMsg } from "../services/event-bus.service";
 
-export function EmailActions({ onRemoveEmail, onApdateEmail, email }) {
+export function EmailActions({ onRemoveEmail, onUpdateEmail, email }) {
 
   function renderReadUnreadIcon(email) {
     const markAsRead = () => {
-      onApdateEmail({ ...email, isRead: true })
+      onUpdateEmail({ ...email, isRead: true })
       showSuccessMsg("Email marked as read.")
     }
 
     const markAsUnread = () => {
-      onApdateEmail({ ...email, isRead: false })
+      onUpdateEmail({ ...email, isRead: false })
       showSuccessMsg("Email marked as unread.")
     }
 

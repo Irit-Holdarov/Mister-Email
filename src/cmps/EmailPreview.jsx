@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-import { GoStarFill } from "react-icons/go";
+import { GoStarFill } from "react-icons/go"
 
-import { CheckBox } from "./CheckBox";
-import { EmailActions } from "./EmailActions";
+import { CheckBox } from "./CheckBox"
+import { EmailActions } from "./EmailActions"
 
-export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail }) {
+export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onUpdateEmail }) {
   const params = useParams()
   const navigate = useNavigate()
 
@@ -25,17 +25,17 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
   }
 
   function determineSenderName() {
-    let senderName;
+    let senderName
     if (params.folder === 'sent') {
-      senderName = `to: ${senderNameTo(email)}`;
+      senderName = `to: ${senderNameTo(email)}`
     } else if (params.folder === 'drafts') {
-      senderName = 'Draft';
+      senderName = 'Draft'
     } else if (params.folder === 'trash' && email.isDraft) {
-      senderName = 'Draft';
+      senderName = 'Draft'
     } else {
       senderName = senderNameFrom(email);
     }
-    return senderName;
+    return senderName
   }
 
   const senderName = determineSenderName()
@@ -70,7 +70,7 @@ export function EmailPreview({ email, onUpdateStar, onRemoveEmail, onApdateEmail
 
       <div className="email-preview-sent-at">{formattedDate(email.sentAt)}</div>
 
-      <EmailActions onRemoveEmail={onRemoveEmail} onApdateEmail={onApdateEmail} email={email} />
+      <EmailActions onRemoveEmail={onRemoveEmail} onUpdateEmail={onUpdateEmail} email={email} />
     </article>
   )
 }

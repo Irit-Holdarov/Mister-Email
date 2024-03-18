@@ -15,6 +15,7 @@ export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
   const [unreadCount, setUnreadCount] = useState(0)
+  const [draftsCount, setDraftsCount] = useState(0)
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
   // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
   const params = useParams()
@@ -36,6 +37,10 @@ export function EmailIndex() {
         const unread = emails.filter(email => !email.isRead).length
         setUnreadCount(unread)
       }
+      if (params.folder === 'drafts') {
+        const draftsCount = emails.filter(email => email.isDraft).length
+        setDraftsCount(draftsCount)
+      }
     } catch (err) {
       console.log('Error in loadEmails', err)
     }
@@ -43,10 +48,13 @@ export function EmailIndex() {
 
   async function onRemoveEmail(emailId) {
     try {
-      await emailService.remove(emailId)
+     const removedEmail = await emailService.remove(emailId)
       setEmails((prevEmails) => {
         return prevEmails.filter(email => email.id != emailId)
       })
+      if (removedEmail.isDraft) {
+        setDraftsCount(prevDraftsCount => prevDraftsCount - 1);
+      }
     } catch (err) {
       console.log("Error in onRemoveEmail", err)
       showErrorMsg('Could not delete email.')
@@ -73,6 +81,10 @@ export function EmailIndex() {
     try {
       const saveEmail = await emailService.save(email)
       setEmails((prevEmails) => [...prevEmails, saveEmail])
+
+      if (saveEmail.isDraft) {
+        setDraftsCount(prevDraftsCount => prevDraftsCount + 1);
+      }
     } catch (err) {
       console.log("Error in onAddEmail", err)
     }
@@ -85,7 +97,7 @@ export function EmailIndex() {
     <div className="email-index">
       <AppEmailHeader />
       <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-      <SideBar unreadCount={unreadCount} />
+      <SideBar unreadCount={unreadCount} draftsCount={draftsCount} />
       {params.emailId && <Outlet />}
       {!params.emailId &&
         <EmailList

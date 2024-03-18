@@ -8,7 +8,7 @@ import sent from "../assets/imgs/sent.png"
 import drafts from "../assets/imgs/drafts.png"
 import trash from "../assets/imgs/delete.png"
 
-export function SideBar({unreadCount}) {
+export function SideBar({ unreadCount, draftsCount }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = useParams()
   const [focusedItem, setFocusedItem] = useState('inbox')
@@ -42,15 +42,20 @@ export function SideBar({unreadCount}) {
 
       <div className="side-bar-items">
         {sidebarItems.map((item, index) => (
-          <SideBarItem key={index} {...item} isActive={focusedItem === item.name.toLocaleLowerCase()} unreadCount={unreadCount}/>
+          <SideBarItem key={index}
+            {...item}
+            isActive={focusedItem === item.name.toLocaleLowerCase()}
+            unreadCount={unreadCount}
+            draftsCount={draftsCount} />
         ))}
       </div>
     </section>
   )
 }
 
-export function SideBarItem({ to, imgSrc, altText, name, isActive , unreadCount}) {
+export function SideBarItem({ to, imgSrc, altText, name, isActive, unreadCount, draftsCount }) {
   const isUnread = unreadCount > 0
+  const isDrafts = draftsCount > 0
 
   return (
     <Link className={`item-content item-content-${name.toLowerCase()} ${isActive ? 'active' : ''}`}
@@ -61,13 +66,21 @@ export function SideBarItem({ to, imgSrc, altText, name, isActive , unreadCount}
           <img src={imgSrc} alt={altText} />
         </span>
 
-        <span className={`name-item ${isUnread && name.toLowerCase() === 'inbox' ? 'bold' : ''}`}>
+        <span className={`name-item ${isUnread && name.toLowerCase() === 'inbox' ? 'bold' : ''}
+        ${isDrafts && name.toLowerCase() === 'drafts' ? 'bold' : ''}`}>
           {name}
         </span>
       </div>
+
       {isUnread && name.toLowerCase() === 'inbox' && (
-         <span className="count-folder">
+        <span className="count-folder">
           {unreadCount}
+        </span>
+      )}
+
+      {isDrafts && name.toLowerCase() === 'drafts' && (
+        <span className="count-folder">
+          {draftsCount}
         </span>
       )}
 

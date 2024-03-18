@@ -55,6 +55,7 @@
   height: 20px;
   margin-right: 16px;
 }
+
 .item-folder{
   display: flex;
   align-items: center;
@@ -66,6 +67,10 @@
 
 .bold{
   font-weight: bold;
+}
+
+.name-item{
+  font-size: .875rem;
 }
 
 @media (max-width: 600px) {

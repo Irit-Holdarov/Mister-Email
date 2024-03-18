@@ -11,13 +11,14 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
   const navigate = useNavigate()
   const { folder, emailId } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
- 
+
   const draftId = searchParams.get('compose')
 
   useEffect(() => {
-    if (draftId) 
-    loadEmail()
+    if (draftId)
+      loadEmail()
   }, [])
+
 
   async function loadEmail() {
     try {
@@ -55,10 +56,12 @@ export function EmailCompose({ onAddEmail, onApdateEmail }) {
     try {
       const updateEmail = { ...email, isDraft: true }
       if (email.to.trim() !== "" || email.subject.trim() !== "" || email.body.trim() !== "") {
-        if(email.id) await onApdateEmail(updateEmail)
+        if (email.id) await onApdateEmail(updateEmail)
         else await onAddEmail(updateEmail)
         showSuccessMsg('Email moved to drafts.')
       }
+      
+
       navigate(linkUrl)
     } catch (error) {
       console.error("Error saving email to drafts:", error)

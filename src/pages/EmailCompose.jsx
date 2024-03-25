@@ -8,17 +8,15 @@ import { showErrorMsg } from "../services/event-bus.service"
 
 export function EmailCompose({ onAddEmail, onUpdateEmail }) {
   const [email, setEmail] = useState(emailService.getDefualtEmail)
-  const navigate = useNavigate()
   const { folder, emailId } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const navigate = useNavigate()
   const draftId = searchParams.get('compose')
 
   useEffect(() => {
     if (draftId !== 'new')
       loadEmail()
   }, [])
-
 
   async function loadEmail() {
     try {
@@ -65,8 +63,6 @@ export function EmailCompose({ onAddEmail, onUpdateEmail }) {
         else await onAddEmail(updateEmail)
         showSuccessMsg('Email moved to drafts.')
       }
-
-
       navigate(linkUrl)
     } catch (error) {
       console.error("Error saving email to drafts:", error)

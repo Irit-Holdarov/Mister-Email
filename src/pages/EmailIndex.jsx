@@ -29,6 +29,7 @@ export function EmailIndex() {
       setEmails([])
     }
   }, [params.folder, filterBy])
+  
 
   function onSetFilter(fieldsToUpdate) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))

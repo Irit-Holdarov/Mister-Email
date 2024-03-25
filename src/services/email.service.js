@@ -22,25 +22,6 @@ _createEmails()
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const lowerTxt = filterBy.txt.toLowerCase()
-        emails = emails.filter(email => {
-            return (
-                email.subject.toLowerCase().includes(lowerTxt) ||
-                email.from.toLowerCase().includes(lowerTxt) ||
-                email.body.toLowerCase().includes(lowerTxt)
-            )
-        })
-    }
-
-    if (filterBy.isRead !== null) {
-        emails = emails.filter(email => email.isRead === filterBy.isRead)
-    }
-
-    if (filterBy.isStarred !== null) {
-        emails = emails.filter(email => email.isStarred === filterBy.isStarred)
-    }
-
     if (filterBy.status) {
         switch (filterBy.status) {
             case 'inbox':
@@ -62,12 +43,29 @@ async function query(filterBy) {
                 break
         }
     }
+    if (filterBy.txt) {
+        const lowerTxt = filterBy.txt.toLowerCase()
+        emails = emails.filter(email => {
+            return (
+                email.subject.toLowerCase().includes(lowerTxt) ||
+                email.from.toLowerCase().includes(lowerTxt) ||
+                email.body.toLowerCase().includes(lowerTxt)
+            )
+        })
+    }
+
+    if (filterBy.isRead !== null) {
+        emails = emails.filter(email => email.isRead === filterBy.isRead)
+    }
+
+    if (filterBy.isStarred !== null) {
+        emails = emails.filter(email => email.isStarred === filterBy.isStarred)
+    }
     return emails
 }
 
 function getDefaultFilter() {
     return {
-        // status: 'inbox',
         txt: '',
         isRead: null,
         isStarred: null,
@@ -76,9 +74,28 @@ function getDefaultFilter() {
 
 function getFilterFromParams(searchParams) {
     const defaultFilter = getDefaultFilter()
+    const filterBy = {}
     for (const field in defaultFilter) {
         filterBy[field] = searchParams.get(field) || defaultFilter[field]
     }
+    // if (filterBy.isRead) {
+    //     if (filterBy.isRead === 'false') {
+    //         filterBy.isRead = false
+    //     } else if (filterBy.isRead === 'true') {
+    //         filterBy.isRead = true
+    //     } else if (filterBy.isRead === 'null') {
+    //         filterBy.isRead = null
+    //     }
+    // }
+    // if (filterBy.isStarred) {
+    //     if (filterBy.isStarred === 'false') {
+    //         filterBy.isStarred = false
+    //     } else if (filterBy.isStarred === 'true') {
+    //         filterBy.isStarred = true
+    //     } else if (filterBy.isStarred === 'null') {
+    //         filterBy.isStarred = null
+    //     }
+    // }
     return filterBy
 }
 

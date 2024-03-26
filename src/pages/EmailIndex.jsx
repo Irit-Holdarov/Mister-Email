@@ -11,25 +11,21 @@ import { EmailFilter } from "../cmps/EmailFilter"
 
 import { EmailCompose } from "./EmailCompose"
 
-
 export function EmailIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [emails, setEmails] = useState(null)
   const [unreadCount, setUnreadCount] = useState(0)
   const [draftsCount, setDraftsCount] = useState(0)
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter)
-  // const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
   const params = useParams()
 
   useEffect(() => {
-    // setSearchParams(filterBy)
     loadEmails()
 
     return () => {
       setEmails([])
     }
-  }, [params.folder, filterBy])
-  
+  }, [filterBy, params.folder])
 
   function onSetFilter(fieldsToUpdate) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))

@@ -40,7 +40,7 @@ async function query(filterBy) {
                 emails = emails.filter(email => email.removedAt)
                 break
             default:
-                break
+                return emails
         }
     }
     if (filterBy.txt) {
@@ -78,24 +78,26 @@ function getFilterFromParams(searchParams) {
     for (const field in defaultFilter) {
         filterBy[field] = searchParams.get(field) || defaultFilter[field]
     }
-    // if (filterBy.isRead) {
-    //     if (filterBy.isRead === 'false') {
-    //         filterBy.isRead = false
-    //     } else if (filterBy.isRead === 'true') {
-    //         filterBy.isRead = true
-    //     } else if (filterBy.isRead === 'null') {
-    //         filterBy.isRead = null
-    //     }
-    // }
-    // if (filterBy.isStarred) {
-    //     if (filterBy.isStarred === 'false') {
-    //         filterBy.isStarred = false
-    //     } else if (filterBy.isStarred === 'true') {
-    //         filterBy.isStarred = true
-    //     } else if (filterBy.isStarred === 'null') {
-    //         filterBy.isStarred = null
-    //     }
-    // }
+    if (filterBy.isRead) {
+        if (filterBy.isRead === 'false') {
+            filterBy.isRead = false
+        } else if (filterBy.isRead === 'true') {
+            filterBy.isRead = true
+        } else if (filterBy.isRead === 'null') {
+            filterBy.isRead = null
+        }
+    }
+    if (filterBy.isStarred) {
+        if (filterBy.isStarred === 'false') {
+            filterBy.isStarred = false
+        } else if (filterBy.isStarred === 'true') {
+            filterBy.isStarred = true
+        } else if (filterBy.isStarred === 'null') {
+            filterBy.isStarred = null
+        }
+    }
+
+    console.log('filterBy from service: ' ,filterBy)
     return filterBy
 }
 
@@ -128,6 +130,7 @@ function getDefualtEmail(subject = '', body = '', to = '') {
     return {
         subject,
         body,
+        isDraft: false,
         isRead: true,
         isStarred: false,
         sentAt: null,

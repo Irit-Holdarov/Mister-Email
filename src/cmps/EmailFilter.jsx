@@ -12,7 +12,7 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 }, [filterByToEdit, params])
 
   function handleChange(ev) {
-    let { value, name: field } = ev.target // ev.target.value  ev.target.name
+    let { value, name: field } = ev.target 
     const parsingnames = ['isStarred', 'isRead']
     if (parsingnames.includes(field)) {
       value = JSON.parse(value)
